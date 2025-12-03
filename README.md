@@ -26,8 +26,7 @@ El sistema incluye una serie de funcionalidades de procesamiento de medios asist
 
 1.  Clona el repositorio:
     ```bash
-    git clone [https://github.com/tu-usuario/multimedia-mininetflix-ai.git](https://github.com/tu-usuario/multimedia-mininetflix-ai.git)
-    cd multimedia-mininetflix-ai
+    git clone https://github.com/alvarogarcia60/multimedia-mininetflix-ai
     ```
 2.  *Añadir instrucciones de instalación (dependencias, entorno virtual, etc.).*
 3.  *Añadir comandos de ejecución (p. ej., `python main.py`)*
