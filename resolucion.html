@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini-Netflix AI — Cambiar resolución</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Tipografía profesional -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <span class="logo">Mini-Netflix <span>AI</span> 🎬</span>
+    </nav>
+
+    <!-- BOTÓN VOLVER -->
+    <div class="back-container">
+        <a href="index.html" class="btn-back">⬅ Volver al menú</a>
+    </div>
+
+    <main class="container">
+
+        <!-- SECCIÓN UPLOAD -->
+        <section class="card glass upload-box fade-in">
+            <h2 class="section-title">🖥️ Cambiar resolución del vídeo</h2>
+            <p class="section-subtitle">Reescala tu vídeo a la resolución que quieras sin comprimirlo</p>
+
+            <!-- SELECTOR DE RESOLUCIÓN -->
+            <label for="resolutionSelect" class="select-label">Seleccionar nueva resolución:</label>
+            <select id="resolutionSelect" class="select-ui">
+                <option value="original">Mantener original</option>
+                <option value="1080">1920×1080 (Full HD)</option>
+                <option value="720">1280×720 (HD)</option>
+                <option value="480">854×480 (SD)</option>
+                <option value="360">640×360</option>
+                <option value="240">426×240</option>
+            </select>
+
+            <!-- INPUT -->
+            <input type="file" id="inputResolution" accept="video/*" class="input-file">
+
+            <!-- BOTÓN -->
+            <button id="changeResBtn" class="btn-primary">Cambiar resolución</button>
+        </section>
+
+        <!-- PROGRESO -->
+        <section class="card glass fade-in" id="resProgressSection" style="display:none;">
+            <p id="resProgressText" class="progress-label">Procesando...</p>
+            <div class="progress-bar">
+                <div id="resProgressFill"></div>
+            </div>
+        </section>
+
+        <!-- COMPARACIÓN DE VIDEOS -->
+        <div class="video-grid fade-in">
+            <div class="video-box card glass">
+                <h3>🎬 Original</h3>
+                <video id="resOriginalVideo" controls></video>
+            </div>
+
+            <div class="video-box card glass">
+                <h3>📉 Reescalado</h3>
+                <video id="resChangedVideo" controls></video>
+            </div>
+        </div>
+
+        <!-- DESCARGA -->
+        <button id="downloadResBtn" class="btn-secondary fade-in" disabled>
+            ⬇ Descargar vídeo reescalado
+        </button>
+
+    </main>
+
+    <script src="resolucion.js"></script>
+</body>
+</html>

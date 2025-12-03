@@ -1,0 +1,105 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini-Netflix AI</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Tipografía profesional -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <nav class="navbar">
+        <span class="logo">Mini-Netflix <span>AI</span> 🎬</span>
+    </nav>
+
+    <!-- BOTÓN VOLVER -->
+    <div class="back-container">
+        <a href="index.html" class="btn-back">⬅ Volver al menú</a></div>
+    <main class="container">
+
+        <!-- SECCIÓN UPLOAD -->
+        <section class="card glass upload-box fade-in">
+            <h2 class="section-title">📁 Subir y procesar vídeo</h2>
+            <p class="section-subtitle">Compresión inteligente, análisis y resumen automático</p>
+
+            <input type="file" id="inputVideo" accept="video/*" class="input-file">
+            <button id="processBtn" class="btn-primary">Procesar vídeo</button>
+        </section>
+
+        <!-- PROGRESO -->
+        <section class="card glass fade-in">
+            <p id="progressText" class="progress-label">Progreso: 0%</p>
+            <div class="progress-bar">
+                <div id="progressFill"></div>
+            </div>
+        </section>
+
+        <!-- COMPARACIÓN DE VIDEOS -->
+        <div class="video-grid fade-in">
+            <div class="video-box card glass">
+                <h3>🎬 Original</h3>
+                <video id="videoOriginal" controls></video>
+            </div>
+
+            <div class="video-box card glass">
+                <h3>✨ Comprimido</h3>
+                <video id="videoCompressed" controls></video>
+            </div>
+        </div>
+
+        <!-- PANEL PROFESIONAL -->
+        <section id="analysis-section" class="card analysis-card glass fade-in" style="display:none;">
+            <h2 class="analysis-title">📊 Análisis de compresión</h2>
+
+            <div class="analysis-grid">
+
+                <div class="analysis-item">
+                    <strong>Resolución original:</strong>
+                    <span id="resOriginal">-</span>
+                </div>
+
+                <div class="analysis-item">
+                    <strong>Resolución comprimida:</strong>
+                    <span id="resCompressed">-</span>
+                </div>
+
+                <div class="analysis-item">
+                    <strong>Tamaño original:</strong>
+                    <span id="sizeOriginal">-</span>
+                </div>
+
+                <div class="analysis-item">
+                    <strong>Tamaño comprimido:</strong>
+                    <span id="sizeCompressed">-</span>
+                </div>
+
+                <div class="analysis-item">
+                    <strong>Duración:</strong>
+                    <span id="durationVideo">-</span>
+                </div>
+
+                <div class="analysis-item">
+                    <strong>Reducción total:</strong>
+                    <span id="reductionPercent">-</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- DESCARGA -->
+        <button id="downloadBtn" class="btn-secondary fade-in" disabled>
+            ⬇ Descargar vídeo comprimido
+        </button>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
+

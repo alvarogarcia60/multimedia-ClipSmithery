@@ -1,12 +1,12 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mini-Netflix AI</title>
+    <title>Mini-Netflix AI — Panel Principal</title>
 
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Tipografía profesional -->
+    <!-- Tipografía pro -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -18,84 +18,43 @@
         <span class="logo">Mini-Netflix <span>AI</span> 🎬</span>
     </nav>
 
-    <main class="container">
+    <main class="container menu-container">
 
-        <!-- SECCIÓN UPLOAD -->
-        <section class="card glass upload-box fade-in">
-            <h2 class="section-title">📁 Subir y procesar vídeo</h2>
-            <p class="section-subtitle">Compresión inteligente, análisis y resumen automático</p>
+        <h1 class="menu-title">Selecciona una funcionalidad</h1>
+        <p class="menu-subtitle">Elige qué quieres hacer con tu vídeo</p>
 
-            <input type="file" id="inputVideo" accept="video/*" class="input-file">
-            <button id="processBtn" class="btn-primary">Procesar vídeo</button>
-        </section>
+        <div class="menu-grid">
 
-        <!-- PROGRESO -->
-        <section class="card glass fade-in">
-            <p id="progressText" class="progress-label">Progreso: 0%</p>
-            <div class="progress-bar">
-                <div id="progressFill"></div>
-            </div>
-        </section>
+            <!-- COMPRESIÓN -->
+            <a href="compresion.html" class="menu-card glass">
+                <h2>📉 Compresión de vídeo</h2>
+                <p>Reduce el tamaño manteniendo calidad y audio.</p>
+            </a>
 
-        <!-- COMPARACIÓN DE VIDEOS -->
-        <div class="video-grid fade-in">
-            <div class="video-box card glass">
-                <h3>🎬 Original</h3>
-                <video id="videoOriginal" controls></video>
-            </div>
+            <!-- CAMBIO DE RESOLUCIÓN -->
+            <a href="resolucion.html" class="menu-card glass">
+                <h2>🖥️ Cambiar resolución</h2>
+                <p>Reescala el vídeo a 1080p, 720p, 480p, y más.</p>
+            </a>
 
-            <div class="video-box card glass">
-                <h3>✨ Comprimido</h3>
-                <video id="videoCompressed" controls></video>
-            </div>
+            <!-- FUTURAS FUNCIONALIDADES -->
+            <a href="#" class="menu-card glass disabled">
+                <h2>🎧 Extraer audio</h2>
+                <p class="soon">Próximamente…</p>
+            </a>
+
+            <a href="#" class="menu-card glass disabled">
+                <h2>📝 Transcripción IA</h2>
+                <p class="soon">Próximamente…</p>
+            </a>
+
+            <a href="#" class="menu-card glass disabled">
+                <h2>🤖 Resumen inteligente</h2>
+                <p class="soon">Próximamente…</p>
+            </a>
+
         </div>
-
-        <!-- PANEL PROFESIONAL -->
-        <section id="analysis-section" class="card analysis-card glass fade-in" style="display:none;">
-            <h2 class="analysis-title">📊 Análisis de compresión</h2>
-
-            <div class="analysis-grid">
-
-                <div class="analysis-item">
-                    <strong>Resolución original:</strong>
-                    <span id="resOriginal">-</span>
-                </div>
-
-                <div class="analysis-item">
-                    <strong>Resolución comprimida:</strong>
-                    <span id="resCompressed">-</span>
-                </div>
-
-                <div class="analysis-item">
-                    <strong>Tamaño original:</strong>
-                    <span id="sizeOriginal">-</span>
-                </div>
-
-                <div class="analysis-item">
-                    <strong>Tamaño comprimido:</strong>
-                    <span id="sizeCompressed">-</span>
-                </div>
-
-                <div class="analysis-item">
-                    <strong>Duración:</strong>
-                    <span id="durationVideo">-</span>
-                </div>
-
-                <div class="analysis-item">
-                    <strong>Reducción total:</strong>
-                    <span id="reductionPercent">-</span>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- DESCARGA -->
-        <button id="downloadBtn" class="btn-secondary fade-in" disabled>
-            ⬇ Descargar vídeo comprimido
-        </button>
-
     </main>
 
-    <script src="app.js"></script>
 </body>
 </html>

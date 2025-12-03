@@ -1,6 +1,4 @@
-/* ======================================
-   ESTILO GENERAL EMPRESA PREMIUM
-====================================== */
+/* ESTILO GENERAL EMPRESA PREMIUM */
 
 body {
     margin: 0;
@@ -185,4 +183,84 @@ body {
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/*  MENÚ PRINCIPAL */
+
+.menu-container {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.menu-title {
+    font-size: 2.4rem;
+    margin-bottom: 8px;
+    color: #66fcf1;
+}
+
+.menu-subtitle {
+    color: #c5c6c7;
+    margin-bottom: 40px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.menu-card {
+    padding: 35px 25px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: 0.25s;
+}
+
+.menu-card:hover:not(.disabled) {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 35px rgba(102,252,241,0.25);
+}
+
+.menu-card.disabled {
+    opacity: 0.4;
+    cursor: default;
+    pointer-events: none;
+}
+
+.menu-card h2 {
+    margin-bottom: 10px;
+}
+
+.soon {
+    opacity: 0.7;
+}
+
+/* BOTÓN VOLVER AL MENÚ */
+
+.back-container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 110px auto 10px;
+    text-align: left;
+}
+
+.btn-back {
+    display: inline-block;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    color: #66fcf1;
+    border: 1px solid #66fcf1;
+    text-decoration: none;
+    transition: 0.25s;
+    background: rgba(15, 15, 25, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.btn-back:hover {
+    background: rgba(102,252,241,0.15);
+    box-shadow: 0 0 12px rgba(102,252,241,0.35);
+    transform: translateX(-3px);
 }
