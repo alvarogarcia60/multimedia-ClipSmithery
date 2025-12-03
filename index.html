@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini-Netflix AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1> Mini-Netflix AI</h1>
+        <p>Sube un vídeo y genera una versión comprimida, transcripción y resumen automático.</p>
+    </header>
+
+    <section id="uploader">
+        <input type="file" id="inputVideo" accept="video/*">
+        <button id="processBtn">Procesar vídeo</button>
+    </section>
+
+    <section id="player">
+        <video id="videoPlayer" controls></video>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
