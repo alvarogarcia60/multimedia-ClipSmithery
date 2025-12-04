@@ -155,3 +155,4 @@ downloadBtn.addEventListener("click", () => {
     a.download = "video_comprimido.webm";
     a.click();
 });
+
