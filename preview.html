@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini-Netflix AI — Vista previa automática</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Tipografía pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <span class="logo">Mini-Netflix <span>AI</span> 🎬</span>
+    </nav>
+
+    <!-- BOTÓN VOLVER -->
+    <div class="back-container fade-in">
+        <a href="index.html" class="btn-back">⬅ Volver al menú</a>
+    </div>
+
+    <main class="container fade-in">
+
+        <!-- CARD PRINCIPAL -->
+        <section class="card glass">
+            <h2 class="section-title">🎞️ Vista previa automática</h2>
+            <p class="section-subtitle">
+                Genera un clip corto (3–4 segundos) tipo Netflix que se reproduce automáticamente.
+            </p>
+
+            <!-- INPUT -->
+            <input type="file" id="inputPreview" accept="video/*" class="input-file">
+
+            <!-- BOTÓN -->
+            <button id="generatePreviewBtn" class="btn-primary">
+                Generar vista previa
+            </button>
+        </section>
+
+        <!-- PROGRESO -->
+        <section class="card glass fade-in" id="previewProgressSection" style="display:none;">
+            <p id="previewProgressText" class="progress-label">Procesando…</p>
+
+            <div class="progress-bar">
+                <div id="previewProgressFill"></div>
+            </div>
+        </section>
+
+        <!-- RESULTADO -->
+        <section class="card glass fade-in" id="previewResult" style="display:none;">
+            <h3 class="section-title">Vista previa generada</h3>
+
+            <video id="previewVideo" controls muted style="margin-top: 15px; border-radius: 15px; width:100%; box-shadow:0 0 20px rgba(102,252,241,0.18);"></video>
+
+            <button id="downloadPreviewBtn" class="btn-secondary" disabled>
+                ⬇ Descargar vista previa
+            </button>
+        </section>
+
+    </main>
+
+    <script src="js/preview.js"></script>
+</body>
+</html>

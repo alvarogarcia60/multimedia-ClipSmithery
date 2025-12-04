@@ -18,38 +18,61 @@
         <span class="logo">Mini-Netflix <span>AI</span> 🎬</span>
     </nav>
 
-    <main class="container menu-container">
+    <main class="container menu-container fade-in">
 
         <h1 class="menu-title">Selecciona una funcionalidad</h1>
         <p class="menu-subtitle">Elige qué quieres hacer con tu vídeo</p>
 
-        <div class="menu-grid">
+        <!-- GRID PRINCIPAL -->
+        <div class="menu-grid netflix-grid">
 
             <!-- COMPRESIÓN -->
-            <a href="compresion.html" class="menu-card glass">
-                <h2>📉 Compresión de vídeo</h2>
+            <a href="compresion.html" class="menu-card glass enhanced-card">
+                <div class="card-icon">📉</div>
+                <h2>Compresión de vídeo</h2>
                 <p>Reduce el tamaño manteniendo calidad y audio.</p>
             </a>
 
-            <!-- CAMBIO DE RESOLUCIÓN -->
-            <a href="resolucion.html" class="menu-card glass">
-                <h2>🖥️ Cambiar resolución</h2>
-                <p>Reescala el vídeo a 1080p, 720p, 480p, y más.</p>
+            <!-- RESOLUCIÓN -->
+            <a href="resolucion.html" class="menu-card glass enhanced-card">
+                <div class="card-icon">🖥️</div>
+                <h2>Cambiar resolución</h2>
+                <p>Reescala el vídeo a 1080p, 720p o 480p.</p>
             </a>
 
-            <!-- FUTURAS FUNCIONALIDADES -->
-            <a href="#" class="menu-card glass disabled">
-                <h2>🎧 Extraer audio</h2>
+            <!-- MINIATURAS -->
+            <a href="miniaturas.html" class="menu-card glass enhanced-card">
+                <div class="card-icon">🖼️</div>
+                <h2>Generar miniaturas</h2>
+                <p>Obtén capturas automáticas en diferentes tiempos.</p>
+            </a>
+
+            <!-- VISTA PREVIA AUTOMÁTICA -->
+            <a href="preview.html" class="menu-card glass enhanced-card">
+                <div class="card-icon">🎞️</div>
+                <h2>Vista previa automática</h2>
+                <p>Genera un clip corto estilo Netflix.</p>
+            </a>
+
+
+            <!-- TRANSCRIPCIÓN IA -->
+            <a href="#" class="menu-card glass enhanced-card disabled">
+                <div class="card-icon">📝</div>
+                <h2>Transcripción IA</h2>
                 <p class="soon">Próximamente…</p>
             </a>
 
-            <a href="#" class="menu-card glass disabled">
-                <h2>📝 Transcripción IA</h2>
+            <!-- RESUMEN INTELIGENTE -->
+            <a href="#" class="menu-card glass enhanced-card disabled">
+                <div class="card-icon">🤖</div>
+                <h2>Resumen automático</h2>
                 <p class="soon">Próximamente…</p>
             </a>
 
-            <a href="#" class="menu-card glass disabled">
-                <h2>🤖 Resumen inteligente</h2>
+            <!-- TRÁILER AUTOMÁTICO -->
+            <a href="#" class="menu-card glass enhanced-card disabled">
+                <div class="card-icon">🎬</div>
+                <h2>Tráiler automático</h2>
                 <p class="soon">Próximamente…</p>
             </a>
 
@@ -58,5 +81,3 @@
 
 </body>
 </html>
-
-<script src="js/app.js"></script>

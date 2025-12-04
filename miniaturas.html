@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini-Netflix AI — Miniaturas</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <span class="logo">Mini-Netflix <span>AI</span> 🎬</span>
+    </nav>
+
+    <!-- BOTÓN VOLVER -->
+    <div class="back-container">
+        <a href="index.html" class="btn-back">⬅ Volver al menú</a>
+    </div>
+
+    <main class="container">
+
+        <!-- SECCIÓN DE GENERACIÓN -->
+        <section class="card glass fade-in upload-box">
+            <h2 class="section-title">🖼️ Generar miniaturas del vídeo</h2>
+            <p class="section-subtitle">Crea imágenes del vídeo en los puntos que tú elijas</p>
+
+            <label class="select-label">Número de miniaturas:</label>
+            <select id="thumbCount" class="select-ui">
+                <option value="3">3 miniaturas</option>
+                <option value="5">5 miniaturas</option>
+                <option value="10">10 miniaturas</option>
+            </select>
+
+            <input type="file" id="inputThumbs" accept="video/*" class="input-file">
+
+            <button id="generateThumbsBtn" class="btn-primary">Generar miniaturas</button>
+        </section>
+
+        <!-- RESULTADOS -->
+        <section class="card glass fade-in" id="thumbResults" style="display:none;">
+            <h3 class="section-title">📸 Miniaturas generadas</h3>
+            <div id="thumbGrid" class="thumbnail-grid"></div>
+        </section>
+
+    </main>
+
+    <script src="js/miniaturas.js"></script>
+</body>
+</html>
