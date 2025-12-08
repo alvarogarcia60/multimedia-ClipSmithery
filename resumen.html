@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini-Netflix AI — Resumen Automático</title>
+
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <span class="logo">Mini-Netflix <span>AI</span> 🤖</span>
+    </nav>
+
+    <div class="back-container">
+        <a href="index.html" class="btn-back">⬅ Volver al menú</a>
+    </div>
+
+    <main class="container">
+
+        <section class="card glass upload-box fade-in">
+            <h2 class="section-title">🤖 Resumen Automático con GPT</h2>
+            <p class="section-subtitle">Pega el texto transcrito (o cualquier texto) para generar un resumen con IA.</p>
+
+            <div class="transcription-output" style="margin-right: 20px;">
+                <textarea id="inputText" placeholder="Pega aquí el texto que quieres resumir..."></textarea>
+            </div>
+            
+            <button id="processBtn" class="btn-primary">Generar Resumen</button>
+        </section>
+
+        <section class="card glass fade-in" id="progressSection" style="display:none;">
+            <p id="progressText" class="progress-label">Procesando...</p>
+            <div class="progress-bar">
+                <div id="progressFill"></div>
+            </div>
+        </section>
+        
+        <section class="card glass fade-in" id="resultSection" style="display:none;">
+            <h3 class="section-title">Resumen Generado (GEMINI)</h3>
+            
+            <div class="transcription-output">
+                <textarea id="summaryOutput" readonly></textarea>
+            </div>
+                        
+            <button id="downloadBtn" class="btn-secondary">
+                ⬇ Descargar Resumen (TXT)
+            </button>
+        </section>
+
+    </main>
+
+    <script src="js/resumen.js"></script> 
+</body>
+</html>

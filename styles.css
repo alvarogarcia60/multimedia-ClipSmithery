@@ -370,3 +370,52 @@ body {
 .preview-card:hover .fallback-image {
     display: none;
 }
+
+
+.transcription-output {
+    width: 100%; 
+}
+
+
+.transcription-output textarea {
+    width: 100%;
+    min-height: 200px; 
+    max-height: 400px; 
+    
+
+    overflow-y: auto; 
+    
+
+    resize: none; 
+    
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    border-radius: 8px;
+    
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
+.transcription-output textarea[readonly] {
+    cursor: default;
+    background-color: rgba(255, 255, 255, 0.05); /* Ligeramente más oscuro para indicar readonly */
+}
+
+
+.summary-input-wrapper {
+
+    max-width: 600px; 
+    
+
+    margin-left: auto; 
+    margin-right: auto;
+    
+    width: 100%; 
+}
