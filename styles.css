@@ -419,3 +419,33 @@ body {
     
     width: 100%; 
 }
+#colorChart {
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.35);
+}
+.palette-bar {
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.palette-color {
+    width:80px;
+    height:80px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.35);
+}
+
+.timeline-bar {
+    display:flex;
+    height:40px;
+    border-radius:8px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.timeline-color {
+    flex:1;
+}

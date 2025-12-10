@@ -1,8 +1,6 @@
 console.log("Módulo: RESUMEN AUTOMÁTICO IA cargado correctamente");
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
+/* ELEMENTOS */
 const inputText = document.getElementById("inputText");
 const processBtn = document.getElementById("processBtn");
 const progressSection = document.getElementById("progressSection");
@@ -15,15 +13,13 @@ const downloadBtn = document.getElementById("downloadBtn");
 let summaryResult = "";
 
 
-/* =====================================================
-   Función de Resumen (Llamada al Backend)
-===================================================== */
+/* Función de Resumen (Llamada al Backend) */
 async function generateSummary(text) {
     progressText.textContent = `Analizando texto (${text.length} caracteres)...`;
     progressFill.style.width = "20%";
 
     try {
-        const response = await fetch("http://127.0.0.1:5000/api/generate-summary", {
+        const response = await fetch("/api/generate-summary", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -52,9 +48,7 @@ async function generateSummary(text) {
 }
 
 
-/* =====================================================
-   Eventos UI
-===================================================== */
+/* Eventos UI */
 processBtn.addEventListener("click", async () => {
     const textToSummarize = inputText.value.trim();
     if (!textToSummarize) {

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini-Netflix AI — Subtítulos (Burn-in)</title>
+
+    <link rel="stylesheet" href="styles.css"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <span class="logo">Mini-Netflix <span>AI</span> 🎬</span>
+    </nav>
+
+    <div class="back-container">
+        <a href="index.html" class="btn-back">⬅ Volver al menú</a>
+    </div>
+
+    <main class="container">
+
+        <section class="card glass upload-box fade-in">
+            <h2 class="section-title">✍️ Subtítulos Incrustados (Burn-in)</h2>
+            <p class="section-subtitle">Sube un vídeo y usa la transcripción simulada para incrustar el texto directamente en el vídeo.</p>
+
+            <input type="file" id="inputVideo" accept="video/*" class="input-file">
+            <button id="burnInBtn" class="btn-primary">Generar Vídeo con Subtítulos</button>
+        </section>
+
+        <section class="card glass fade-in" id="progressSection" style="display:none;">
+            <p id="progressText" class="progress-label">Procesando...</p>
+            <div class="progress-bar">
+                <div id="progressFill"></div>
+            </div>
+        </section>
+
+        <div class="video-grid fade-in" id="resultGrid" style="display:none;">
+            <div class="video-box card glass">
+                <h3>🎬 Original</h3>
+                <video id="videoOriginal" controls></video>
+            </div>
+
+            <div class="video-box card glass">
+                <h3>✍️ Subtítulos Incrustados</h3>
+                <video id="videoBurnedIn" controls></video>
+            </div>
+        </div>
+        
+        <button id="downloadBtn" class="btn-secondary fade-in" style="display:none;">
+            ⬇ Descargar Vídeo con Subtítulos
+        </button>
+
+    </main>
+
+    <script src="js/subtitulos.js"></script> </body>
+</html>
