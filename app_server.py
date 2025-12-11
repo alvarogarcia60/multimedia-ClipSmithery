@@ -2,9 +2,13 @@ import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
-from google import genai 
-from google.genai.errors import APIError 
-import time # AÑADIDO: Para simular el tiempo de procesamiento
+
+import base64
+from flask import send_file
+from io import BytesIO
+from PIL import Image, ImageFilter
+from google import genai # NUEVO: para Gemini API
+from google.genai.errors import APIError # Para manejar errores de la API de Gemini
 
 # 1. Cargar variables de entorno (para la API Key)
 load_dotenv()
@@ -12,14 +16,13 @@ load_dotenv()
 # --- DEBUG DE CLAVES AL INICIO ---
 loaded_gemini_key = os.getenv('GEMINI_API_KEY')
 print(f"\n--- DEBUG KEY LOADED ---")
-print(f"Clave Gemini cargada: {bool(loaded_gemini_key)}")
+print(f"Clave Gemini cargada: {bool(loaded_gemini_key)}") 
 if loaded_gemini_key:
     print(f"Primeros 15 caracteres Gemini: {loaded_gemini_key[:15]}...")
 print("--------------------------\n")
 
 # 2. Inicialización
 app = Flask(__name__)
-# Ajusta el puerto (5500) si usas Live Server en otro puerto.
 CORS(app, resources={r"/api/*": {"origins": "http://127.0.0.1:5500"}})
 
 # Inicializar cliente de Gemini
@@ -27,6 +30,7 @@ try:
     if loaded_gemini_key:
         client = genai.Client(api_key=loaded_gemini_key)
     else:
+        # Crea un cliente de marcador de posición si la clave no está disponible
         print("ADVERTENCIA: Clave Gemini no cargada. Las funciones de IA fallarán.")
         client = None 
 except Exception as e:
@@ -40,7 +44,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route('/api/generate-summary', methods=['POST'])
 def generate_summary():
-    """Endpoint para recibir texto y generar un resumen con Gemini."""
+    """Endpoint para recibir texto y generar un resumen con Gemini (GRATUITO)."""
     
     if not client:
         return jsonify({"error": "Error de configuración: Cliente Gemini no inicializado."}), 500
@@ -57,12 +61,14 @@ def generate_summary():
 
         print(f"-> Generando resumen para {len(text_to_summarize)} caracteres con Gemini-2.5-Flash...")
         
+        # 1. Preparar la solicitud de Gemini
         prompt = (
             "Eres un experto en análisis de contenido. Tu tarea es generar un resumen "
             "profesional y conciso de no más de 100 palabras del siguiente texto: "
             f"TEXTO: {text_to_summarize}"
         )
         
+        # 2. Llamada a la API de Gemini
         response = client.models.generate_content(
             model='gemini-2.5-flash',
             contents=prompt
@@ -72,11 +78,13 @@ def generate_summary():
         
     except APIError as e:
         print(f"Error en la API de Gemini (Resumen): {e}")
+        # La API de Gemini devuelve un error si la clave es inválida o la cuota se excede
         return jsonify({"error": f"Fallo la generación del resumen con Gemini: {e}"}), 400
     except Exception as e:
         print(f"Error desconocido en el resumen: {e}")
         return jsonify({"error": f"Fallo la generación del resumen: {e}"}), 500
     
+    # 3. Devolver el resultado
     return jsonify({
         "status": "success",
         "summary": summary_text
@@ -84,7 +92,7 @@ def generate_summary():
 
 @app.route('/api/transcribe-video', methods=['POST'])
 def transcribe_video():
-    """ENDPOINT SIMULADO: Transcripción (Devuelve subtítulos estructurados para Burn-in)."""
+    """ENDPOINT SIMULADO: Transcripción (Mantiene la simulación)."""
     
     if 'video' not in request.files:
         return jsonify({"error": "No se encontró el archivo de vídeo."}), 400
@@ -101,30 +109,86 @@ def transcribe_video():
     except Exception as e:
         return jsonify({"error": f"Error al guardar el archivo: {e}"}), 500
     
-    # --- RESPUESTA ESTRUCTURADA SIMULADA DE SUBTÍTULOS ---
-    # Esto simula un VTT o SRT convertido a un array JSON con tiempos.
-    time.sleep(1.5) # Simula el tiempo de procesamiento
-
-    subtitles_data = [
-        {"time": 0.0, "text": "¡Bienvenidos a Mini-Netflix AI!"},
-        {"time": 2.5, "text": "Este vídeo demuestra el poder del procesamiento multimedia."},
-        {"time": 5.0, "text": "El texto que ves ahora está incrustado en tiempo real."},
-        {"time": 7.5, "text": "Disfruta de la calidad de tus vídeos con subtítulos burn-in."},
-        {"time": 10.0, "text": "Fin de la demostración."}
-    ]
+    # Respuesta simulada
+    transcription_text = "Esta es la transcripción SIMULADA. La transcripción real de audio a texto requiere una API de pago (como Speech-to-Text de Google Cloud o Whisper) o una configuración avanzada."
     
     # Limpieza
     if os.path.exists(filepath):
         os.remove(filepath)
         print(f"-> FIN DE SIMULACIÓN: Archivo temporal eliminado.")
         
-    # Devolver el resultado (JSON de subtítulos)
+    # Devolver el resultado
     return jsonify({
         "status": "success",
-        "subtitles": subtitles_data
+        "transcription": transcription_text
     })
+
+@app.route("/api/recommend-movie", methods=["POST"])
+def recommend_movie():
+    try:
+        data = request.json
+        user_answers = data.get("answers", {})
+
+        prompt = f"""
+Eres un recomendador profesional de cine estilo Netflix. 
+Basado en las siguientes respuestas del usuario, genera:
+
+1) Una película recomendada con explicación detallada.
+2) La descripción del perfil cinematográfico del usuario.
+3) Tres alternativas muy acertadas.
+
+Respuestas del usuario:
+{user_answers}
+
+Formato de salida:
+### PELICULA
+Título: ...
+Explicación: ...
+
+### PERFIL
+Descripción: ...
+
+### ALTERNATIVAS
+- ...
+- ...
+- ...
+"""
+
+        if GEMINI_API_KEY:
+            llm = genai.GenerativeModel("gemini-1.5-flash")
+            result = llm.generate_content(prompt)
+            text = result.text
+        else:
+            raise Exception("Gemini KEY MISSING")
+
+        return jsonify({"result": text})
+
+    except Exception as e:
+        print("❌ Error en Gemini (Recomendador):", e)
+
+        fallback = """
+### PELICULA
+Título: Interstellar
+Explicación: Película recomendada automáticamente como fallback. Combina ciencia ficción, emoción, 
+música épica y mensaje profundo — ideal para usuarios con preferencias reflexivas y narrativas intensas.
+
+### PERFIL
+Usuario con gusto por historias profundas, alto componente emocional, misterio, exploración científica 
+y bandas sonoras muy intensas.
+
+### ALTERNATIVAS
+- Arrival
+- Blade Runner 2049
+- The Martian
+"""
+
+        return jsonify({
+            "result": fallback,
+            "warning": "Gemini no disponible — se usó recomendación alternativa."
+        }), 200
 
 
 if __name__ == '__main__':
+    # Usamos un puerto diferente al de tu frontend (5000 es el estándar de Flask)
     print("Servidor Flask inicializado. Ejecutando en http://127.0.0.1:5000")
     app.run(debug=True, port=5000)
