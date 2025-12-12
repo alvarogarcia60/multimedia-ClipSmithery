@@ -1,81 +1,72 @@
-# Mini-Netflix AI (Multimedia UCLM)
+# Clip Smithery [AI] 
+### La Forja del Contenido Multimedia Inteligente.
+
+Este proyecto es una aplicación web interactiva diseñada como un **Laboratorio de Post-producción Multimedia**. Se enfoca en la manipulación avanzada de vídeo y audio, combinando el procesamiento a nivel de píxel (Canvas API) con la recodificación eficiente (MediaRecorder API).
+
+---
+
 ## Autores
 
-Proyecto desarrollado por:
+Proyecto concebido, diseñado y desarrollado por:
+
 * **Adrián Alameda Alcaide**
 * **Álvaro García Martínez**
 
 *UCLM – Ingeniería Informática (Asignatura Multimedia)*
 
-## Descripción del Proyecto
-
-Este proyecto es una aplicación web interactiva diseñada para simular una plataforma de *streaming* a pequeña escala (Mini-Netflix). Incluye un conjunto de herramientas de procesamiento de vídeo y utilidades asistidas por IA, todas accesibles directamente desde el navegador (*client-side*).
-
 ---
 
-### Funcionalidades Operativas (Client-Side)
+## Funcionalidades Clave Operativas (Estables)
 
-Las siguientes funcionalidades están implementadas en JavaScript puro y son **totalmente operativas** en el navegador:
+El proyecto se centra ahora en herramientas robustas que demuestran el control sobre el *client-side* media processing.
 
-* **Compresión de Vídeo:**
-    * Reduce el tamaño del archivo manteniendo la calidad y el audio.
-    * Muestra datos comparativos (tamaño original vs. comprimido, resolución, porcentaje de reducción) y permite la descarga del nuevo archivo.
-* **Cambio de Resolución:**
-    * Reescala el vídeo a diferentes resoluciones estándar (1080p, 720p, 480p, etc.), conservando el audio original.
-    * Incluye reproductores para comparar el vídeo antes y después del reescalado.
-* **Generación de Miniaturas:**
-    * Obtiene *frames* del vídeo en varios puntos y genera una galería estilo catálogo.
-    * Permite la descarga individual de cada imagen.
-* **Vista Previa Automática estilo Netflix:**
-    * Genera un clip corto (tipo *teaser*) que simula el comportamiento de Netflix al pasar el ratón sobre una tarjeta de contenido.
-* **Resumen Automático (AI - Frontend):**
-    * Permite al usuario pegar texto (como una transcripción) para obtener un resumen generado por un modelo de lenguaje.
+| Módulo | Enfoque | Tecnología Clave |
+| :--- | :--- | :--- |
+| **Compresión de Vídeo** | Optimización de archivos. | `MediaRecorder API` (Recodificación). |
+| **Cambio de Resolución** | Manipulación de la Geometría. | `Canvas API` (Reescalado). |
+| **Generación de Miniaturas** | Extracción de *Frames*. | `Video API` / `Canvas API`. |
+| **Análisis de Paleta de Color** | Analítica Visual. | `Canvas API` (`getImageData` + Muestreo de Píxeles). |
+| **Filtros Cinematográficos** | Manipulación de Píxeles en Vivo (10 Filtros). | `Canvas API` (Filtros Personalizados) / `MediaRecorder` (Grabación del resultado). |
+| **Recorte Vertical (9:16)** | Adaptación de Geometría (Reels/Shorts). | `Canvas API` (`drawImage` con recorte centrado) / `MediaRecorder`. |
+| **Recomendador de Películas** | Test Asistido por IA. | Flask / Gemini API (Modo Fallback Estructurado). |
 
 ---
 
 ## Tecnologías Clave Utilizadas
 
-* **Interfaz:** HTML5 / CSS3 (Diseño estilo Netflix + Glassmorphism).
-* **Lógica:** JavaScript Vanilla.
-* **Procesamiento:** `Canvas API` (para la manipulación de *frames* y reescalado).
-* **Compresión/Grabación:** `MediaRecorder API` (para la recodificación y compresión directa en el navegador).
-* **Multimedia:** `Video & Audio API`.
-* **Datos Dinámicos:** Archivos `JSON` (utilizados en la simulación de catálogo).
-* **IA (Opcional):** Uso de la API de **OpenAI GPT** para el resumen de texto.
+* **Frontend:** HTML5, CSS3 (Glassmorphism), **JavaScript Vanilla**.
+* **Multimedia Core:** **`Canvas API`**, **`MediaRecorder API`**, `Video & Audio API`.
+* **Backend (Servicios IA/CORS):** **Python Flask** (usado para el *endpoint* del Recomendador).
+* **IA (Opcional):** Uso de la API de **Google Gemini** para generación de texto (Requiere `GEMINI_API_KEY`).
 
 ---
 
 ## Instalación y Uso Local
 
-Para ejecutar la aplicación, es necesario usar un servidor local para evitar problemas de seguridad del navegador.
+La aplicación ahora arranca directamente desde la raíz del proyecto.
 
-### 1. Clonación del Repositorio
+### 1. Clonación del Repositorio y Entorno
 
-Clona el proyecto en tu máquina local:
+Clona el proyecto y configura tu entorno virtual:
 
 ```bash
-git clone [https://github.com/alvarogarcia60/multimedia-mininetflix-ai.git](https://github.com/alvarogarcia60/multimedia-mininetflix-ai.git)
-cd multimedia-mininetflix-ai
+git clone [https://github.com/alvarogarcia60/multimedia-ClipSmithery.git](https://github.com/alvarogarcia60/multimedia-ClipSmithery.git)
+cd multimedia-ClipSmithery
+# Si usas Python/Flask: Instala dependencias y activa el entorno virtual (venv)
 ```
 ### 2. Ejecución del Servidor Local
 
-Abre la carpeta del proyecto y ejecuta un servidor local:
+Abre la carpeta del proyecto y ejecuta un servidor local. **Nota:** Dado que el Recomendador de Películas requiere un *backend* activo, la **Opción C (Doble Servidor)** es la más completa.
 
-#### Opción A: VSCode Live Server (Recomendado)
+#### Opción A: VSCode Live Server (Solo Frontend)
 
 1.  Instala la extensión **Live Server** en Visual Studio Code.
-2.  Haz clic derecho sobre el archivo **`html/index.html`** y selecciona **'Open with Live Server'**.
+2.  Haz clic derecho sobre el archivo **`index.html`** (en la raíz) y selecciona **'Open with Live Server'**.
 
-#### Opción B: Servidor Python
+#### Opción B: Servidor Python (Solo Frontend)
 
 1.  Abre tu terminal (WSL/Linux/macOS).
 2.  Ejecuta el servidor HTTP simple de Python:
-    ```bash
-    python3 -m http.server 5500
-    ```
 
-### 3. Acceso a la Aplicación
-
-Accede a la aplicación en tu navegador:
-http://127.0.0.1:5500/html/index.html
-
+```bash
+python3 -m http.server 5500
