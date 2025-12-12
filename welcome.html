@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clip Smithery — Forja Multimedia 🛠️</title>
+    
+    <link rel="stylesheet" href="styles.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ======================================================= */
+        /* ESTILOS DE WELCOME (MODERNOS) */
+        /* ======================================================= */
+        
+        .welcome-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* La caja principal ahora tiene un brillo sutil */
+        .welcome-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px); /* Blur más intenso */
+            border-radius: 25px;
+            padding: 60px 50px;
+            max-width: 650px;
+            /* Sombra y borde que simulan un brillo cian */
+            box-shadow: 0 0 25px rgba(102, 252, 241, 0.2), 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(102, 252, 241, 0.1); /* Borde sutil */
+        }
+
+        .welcome-logo {
+            font-size: 4rem; /* Logo más grande */
+            color: #66fcf1;
+            font-weight: 700;
+            margin-bottom: 5px;
+            /* Efecto de degradado en el texto */
+            background: linear-gradient(90deg, #66fcf1, #45a29e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.4rem;
+            color: #c5c6c7;
+            margin-bottom: 40px;
+        }
+        
+        .mission-text {
+            color: #c5c6c7;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            line-height: 1.6;
+        }
+
+        .btn-access {
+            display: inline-block;
+            padding: 18px 50px;
+            /* Degradado más vibrante */
+            background: linear-gradient(45deg, #45a29e, #66fcf1);
+            color: #0b0c10;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-access:hover {
+            transform: scale(1.05); /* Zoom sutil */
+            box-shadow: 0 0 25px #66fcf1; /* Sombra al pasar el ratón */
+        }
+
+        /* Animación simple para dar un toque moderno */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-box {
+            animation: fadeInDown 1.2s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="welcome-container">
+        <div class="welcome-box">
+            
+            <h1 class="welcome-logo">Clip Smithery 🛠️</h1>
+            <p class="welcome-subtitle">La Forja del Contenido Multimedia Inteligente.</p>
+
+            <p class="mission-text">
+                Bienvenido al **Estudio de Post-producción Avanzada**. Aquí puedes analizar el color, manipular la geometría y aplicar efectos cinematográficos de alto impacto, todo procesado en tu navegador.
+            </p>
+
+            <a href="menu.html" class="btn-access">
+                Iniciar Proyecto
+            </a>
+            
+        </div>
+        
+        <p style="color: #66fcf1; margin-top: 40px; font-size: 0.9rem;">
+            Desarrollado para UCLM por: Álvaro García y Adrián Alameda
+        </p>
+    </main>
+</body>
+</html>

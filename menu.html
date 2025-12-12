@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clip Smithery — Menú de Herramientas</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Estilo para el enlace del logo */
+        .logo-link {
+            text-decoration: none; 
+        }
+        .logo-link:hover .logo {
+            filter: brightness(1.2); 
+            cursor: pointer;
+        }
+        
+        /* Estilo para los títulos de grupo */
+        .group-title {
+            color: #66fcf1;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 30px 0 20px 0;
+            border-bottom: 2px solid rgba(102, 252, 241, 0.2);
+            padding-bottom: 10px;
+        }
+        
+        /* ESTILO PARA EL BOTÓN VER MÁS */
+        .show-more-btn {
+            background: none;
+            border: 2px solid #45a29e;
+            color: #66fcf1;
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            width: 100%; /* Ocupa todo el ancho de la rejilla */
+            grid-column: 1 / -1; /* Ocupa todas las columnas de la rejilla */
+        }
+        
+        .show-more-btn:hover {
+            background-color: rgba(102, 252, 241, 0.1);
+        }
+
+        /* CLASE PARA OCULTAR ELEMENTOS MÁS ALLÁ DE LOS 3 PRIMEROS */
+        /* Esta clase se usa en el JS para ocultar las tarjetas extra */
+        .hidden-card {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="welcome.html" class="logo-link">
+            <span class="logo">Clip Smithery <span>[AI]</span> 🛠️</span>
+        </a>
+    </nav>
+    
+    <main class="container menu-container fade-in">
+
+        <h1 class="menu-title">🚀 Estudio de Post-Producción Avanzada</h1>
+        <p class="menu-subtitle">Selecciona una herramienta para manipular o analizar tu contenido multimedia.</p>
+
+        <h2 class="group-title">1. Optimización y Control de Geometría</h2>
+        <div class="menu-grid netflix-grid" id="group1">
+
+            <a href="compresion.html" class="menu-card glass enhanced-card">
+                <div class="card-icon">📉</div>
+                <h2>Compresión de Vídeo</h2>
+                <p>Reduce el tamaño del archivo para distribución sin pérdida de calidad visual.</p>
+            </a>
+
+            <a href="resolucion.html" class="menu-card glass enhanced-card">
+                <div class="card-icon">🖥️</div>
+                <h2>Cambio de Resolución</h2>
+                <p>Reescala el contenido a estándares (1080p, 720p), preservando el aspect ratio.</p>
+            </a>
+            
+            <a href="recorte-vertical.html" class="menu-card glass enhanced-card">
+                <div class="card-icon">✂️</div>
+                <h2>Recorte Vertical (9:16)</h2>
+                <p>Adapta vídeos horizontales a formato móvil (Reels/Shorts) mediante recorte centrado.</p>
+            </a>
+
+            <a href="rotacion.html" class="menu-card glass enhanced-card hidden-card">
+                <div class="card-icon">🔄</div>
+                <h2>Rotación y Espejo</h2>
+                <p>Gira el vídeo (90/180°) o crea un efecto espejo (horizontal/vertical).</p>
+            </a>
+            
+            <button class="show-more-btn" data-target="group1">
+                Mostrar 1 funcionalidad más ▼
+            </button>
+            
+        </div>
+
+        <h2 class="group-title" style="margin-top: 50px;">2. Analítica Visual y Estilizado Cinematográfico</h2>
+        <div class="menu-grid netflix-grid" id="group2">
+            
+            <a href="analisis-color.html" class="menu-card glass enhanced-card">
+                <div class="card-icon">🎨</div>
+                <h2>Análisis de Paleta</h2>
+                <p>Extrae los 5 colores dominantes del vídeo (Analítica de tono visual).</p>
+            </a>
+            
+            <a href="filtros.html" class="menu-card glass enhanced-card">
+                <div class="card-icon">✨</div>
+                <h2>Filtros Cinematográficos</h2>
+                <p>Aplica 10 efectos de color profesional (Noir, Vintage, Noche Americana).</p>
+            </a>
+
+            <a href="miniaturas.html" class="menu-card glass enhanced-card">
+                <div class="card-icon">🖼️</div>
+                <h2>Generación de Miniaturas</h2>
+                <p>Obtén capturas automáticas clave para portadas y catálogos.</p>
+            </a>
+            
+            <a href="preview.html" class="menu-card glass enhanced-card hidden-card">
+                <div class="card-icon">🎞️</div>
+                <h2>Vista Previa Automática</h2>
+                <p>Genera clips cortos de demostración estilo tráiler/teaser.</p>
+            </a>
+
+            <a href="preview.html" class="menu-card glass enhanced-card hidden-card">
+                <div class="card-icon">➕</div>
+                <h2>Función de Relleno</h2>
+                <p>Este es un elemento extra para simular más de 3 funcionalidades.</p>
+            </a>
+            
+            <button class="show-more-btn" data-target="group2">
+                Mostrar 2 funcionalidades más ▼
+            </button>
+            
+        </div>
+        
+        <h2 class="group-title" style="margin-top: 50px;">3. Servicios Asistidos por IA</h2>
+        <div class="menu-grid netflix-grid" id="group3">
+
+            <a href="recomendador.html" class="menu-card glass enhanced-card" style="grid-column: span 2;">
+                <div class="card-icon">🎯</div>
+                <h2>Test de Películas (IA)</h2>
+                <p>Completa un test de perfil y recibe una recomendación personalizada de contenido.</p>
+            </a>
+            
+            <a href="generador-titulos.html" class="menu-card glass enhanced-card" style="grid-column: span 2;">
+                <div class="card-icon">✍️</div>
+                <h2>Generador de Títulos (IA)</h2>
+                <p>Crea títulos, hashtags y descripciones SEO optimizados para tu clip.</p>
+            </a>
+
+        </div>
+        
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.show-more-btn');
+
+            buttons.forEach(button => {
+                const targetId = button.dataset.target;
+                const container = document.getElementById(targetId);
+                
+                // Selecciona las tarjetas a partir de la cuarta (índice 3 en base 0)
+                const allCards = container.querySelectorAll('.menu-card');
+                
+                // Los elementos ocultos son todos los elementos después del tercer elemento
+                const hiddenCards = Array.from(allCards).slice(3);
+                
+                // Asegurarse de que las tarjetas extra tienen la clase 'hidden-card'
+                if (hiddenCards.length > 0) {
+                    hiddenCards.forEach(card => {
+                        // Solo añadimos la clase 'hidden-card' si no la tiene ya (Group 2 ya la tiene)
+                        if (!card.classList.contains('hidden-card')) {
+                             card.classList.add('hidden-card');
+                        }
+                    });
+                }
+                
+                let isExpanded = false;
+
+                // 1. Inicialización del texto del botón
+                if (hiddenCards.length > 0) {
+                    button.textContent = `Mostrar ${hiddenCards.length} funcionalidades más ▼`;
+                } else {
+                    button.style.display = 'none';
+                }
+
+                // 2. Comportamiento del click
+                button.addEventListener('click', function() {
+                    hiddenCards.forEach(card => {
+                        card.classList.toggle('hidden-card');
+                    });
+
+                    isExpanded = !isExpanded;
+
+                    if (isExpanded) {
+                        button.textContent = '▲ Ocultar Funcionalidades';
+                        // Desplazar la vista al inicio del grupo expandido
+                        document.getElementById(targetId).scrollIntoView({ behavior: 'smooth', block: 'start' }); 
+                    } else {
+                        button.textContent = `Mostrar ${hiddenCards.length} funcionalidades más ▼`;
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

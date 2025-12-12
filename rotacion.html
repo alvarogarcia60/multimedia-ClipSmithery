@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clip Smithery — Rotación y Espejo</title>
+
+    <link rel="stylesheet" href="styles.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="welcome.html" class="logo-link">
+            <span class="logo">Clip Smithery <span>[AI]</span> 🛠️</span>
+        </a>
+    </nav>
+
+    <div class="back-container">
+        <a href="menu.html" class="btn-back">← Volver al menú</a>
+    </div>
+
+    <main class="container">
+
+        <section class="card glass upload-box fade-in">
+            <h2 class="section-title">🔄 Rotación y Espejo (Geometría)</h2>
+            <p class="section-subtitle">Corrige la orientación del vídeo o aplica efectos de reflejo y graba la salida.</p>
+
+            <input type="file" id="inputVideo" accept="video/*" class="input-file">
+
+            <div class="controls-grid" style="margin-top:20px; display:flex; gap: 15px; flex-wrap: wrap; justify-content: center; align-items: center;">
+                
+                <select id="transformSelect" class="input-select" style="min-width: 200px;">
+                    <option value="none">Original</option>
+                    <option value="rotate90">Rotar 90° Derecha</option>
+                    <option value="rotate180">Rotar 180°</option>
+                    <option value="rotate270">Rotar 90° Izquierda</option>
+                    <option value="flipH">Espejo Horizontal (Flip)</option>
+                    <option value="flipV">Espejo Vertical</option>
+                </select>
+                
+                <button id="processBtn" class="btn-primary" disabled>
+                    ▶️ Procesar y Grabar Transformación
+                </button>
+            </div>
+        </section>
+
+        <div class="video-grid fade-in" id="previewGrid" style="display:none;">
+            <div class="video-box card glass">
+                <h3>🎬 Original</h3>
+                <video id="videoOriginal" controls></video>
+            </div>
+
+            <div class="video-box card glass">
+                <h3>🔄 Previsualización Transformada</h3>
+                <canvas id="videoCanvas"></canvas>
+                
+                <video id="videoTransformado" controls style="display:none; margin-top: 20px;"></video>
+                <button id="downloadBtn" class="btn-secondary" style="margin-top: 15px; display:none;">
+                    ⬇ Descargar Vídeo Transformado
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/rotacion.js"></script>
+</body>
+</html>

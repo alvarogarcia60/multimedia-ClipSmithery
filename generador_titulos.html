@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clip Smithery — Generador de Títulos IA</title>
+
+    <link rel="stylesheet" href="styles.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="welcome.html" class="logo-link">
+            <span class="logo">Clip Smithery <span>[AI]</span> 🛠️</span>
+        </a>
+    </nav>
+
+    <div class="back-container">
+        <a href="menu.html" class="btn-back">← Volver al menú</a>
+    </div>
+
+    <main class="container">
+
+        <section class="card glass upload-box fade-in">
+            <h2 class="section-title">✍️ Generador de Títulos y SEO (IA)</h2>
+            <p class="section-subtitle">Utiliza la IA para generar títulos, hashtags y descripciones SEO optimizados para tu contenido.</p>
+            
+            <div style="margin-bottom: 20px;">
+                <label for="inputDesc" style="color: #c5c6c7; margin-bottom: 8px; display: block; text-align: left;">Describe tu clip (qué se ve y qué emoción quieres transmitir, máx 500 caracteres):</label>
+                <textarea id="inputDesc" class="input-textarea" rows="4" maxlength="500" placeholder="Un dron volando sobre una playa tropical al atardecer, con colores cálidos y una sensación de paz..."></textarea>
+            </div>
+            
+            <button id="generateBtn" class="btn-primary">
+                Generar Ideas con IA
+            </button>
+        </section>
+
+        <section class="card glass fade-in" id="resultSection" style="display:none;">
+            <h3 class="section-title">Resultados de la IA</h3>
+            
+            <div class="result-box" style="margin-top:20px; text-align: left;">
+                
+                <h4 style="color: #66fcf1; margin-top: 15px;">Título Sugerido:</h4>
+                <p id="resultTitle" class="result-text" style="background: rgba(102, 252, 241, 0.05); padding: 10px; border-radius: 5px;"></p>
+
+                <h4 style="color: #66fcf1; margin-top: 15px;">Descripción SEO:</h4>
+                <p id="resultDesc" class="result-text" style="background: rgba(102, 252, 241, 0.05); padding: 10px; border-radius: 5px;"></p>
+                
+                <h4 style="color: #66fcf1; margin-top: 15px;">Hashtags y Etiquetas:</h4>
+                <p id="resultTags" class="result-text" style="background: rgba(102, 252, 241, 0.05); padding: 10px; border-radius: 5px;"></p>
+
+            </div>
+            <button id="copyBtn" class="btn-secondary" style="margin-top: 20px;">
+                📋 Copiar Todo
+            </button>
+        </section>
+
+    </main>
+
+    <script src="js/generador_titulos.js"></script>
+</body>
+</html>

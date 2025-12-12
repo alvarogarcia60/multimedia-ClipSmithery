@@ -123,6 +123,53 @@ def transcribe_video():
         "transcription": transcription_text
     })
 
+# app_server.py (Añadir esta nueva ruta)
+
+@app.route('/api/generate-titles', methods=['POST'])
+def generate_titles():
+    data = request.json
+    description = data.get('description', '')
+    
+    if not description:
+        return jsonify({'error': 'La descripción es requerida.'}), 400
+
+    # Usar un prompt que le pida a Gemini generar el contenido
+    prompt = f"""
+    Eres un experto en marketing de contenido de vídeo para redes sociales. 
+    Genera un paquete SEO completo basado en la siguiente descripción del clip. 
+    
+    Descripción del clip: "{description}"
+    
+    El resultado debe estar estrictamente en formato JSON con las siguientes claves:
+    {{
+      "title": "Un título corto y atractivo (máx 60 caracteres)",
+      "description": "Una descripción detallada y optimizada para SEO (máx 400 caracteres)",
+      "tags": "Una lista de hashtags separados por comas (ej: #drone #viajes #playa)"
+    }}
+    """
+    
+    try:
+        # Aquí se llama a la API de Gemini (debe estar inicializada globalmente)
+        response = client.generate_content(
+            prompt,
+            config=GenerateContentConfig(response_mime_type="application/json")
+        )
+        
+        # Parsear el resultado JSON devuelto por Gemini
+        # Nota: La IA devuelve el contenido como string, hay que cargarlo como JSON
+        ai_output = json.loads(response.text)
+        
+        return jsonify(ai_output)
+
+    except Exception as e:
+        # Fallback en caso de error de la API o clave no configurada
+        print(f"Error de IA: {e}")
+        return jsonify({
+            "title": "¡Error! No se pudo contactar con la IA.",
+            "description": f"Intenta revisar tu conexión o tu clave Gemini. Descripción de entrada: {description}",
+            "tags": "#Error #ClipSmithery"
+        }), 500
+
 @app.route("/api/recommend-movie", methods=["POST"])
 def recommend_movie():
     try:
