@@ -7,8 +7,7 @@ import base64
 from flask import send_file
 from io import BytesIO
 from PIL import Image, ImageFilter
-from google import genai # NUEVO: para Gemini API
-from google.genai.errors import APIError # Para manejar errores de la API de Gemini
+import google.generativeai as genai
 
 # 1. Cargar variables de entorno (para la API Key)
 load_dotenv()
@@ -235,7 +234,21 @@ y bandas sonoras muy intensas.
         }), 200
 
 
+
+from flask import send_from_directory
+
+@app.route("/")
+def index():
+    return send_from_directory(".", "index.html")
+
+@app.route("/<path:path>")
+def static_files(path):
+    return send_from_directory(".", path)
+
 if __name__ == '__main__':
-    # Usamos un puerto diferente al de tu frontend (5000 es el estándar de Flask)
-    print("Servidor Flask inicializado. Ejecutando en http://127.0.0.1:5000")
-    app.run(debug=True, port=5000)
+        app.run(
+        host="127.0.0.1",
+        port=5000,
+        debug=False,
+        use_reloader=False
+    )
