@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clip Smithery — Recorte Vertical (9:16)</title>
+
+    <link rel="stylesheet" href="styles.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <span class="logo">Clip Smithery <span>[AI]</span> 🛠️</span>
+    </nav>
+
+    <div class="back-container">
+        <a href="index.html" class="btn-back">⬅ Volver al menú</a>
+    </div>
+
+    <main class="container">
+
+        <section class="card glass upload-box fade-in">
+            <h2 class="section-title">✂️ Recorte Vertical (9:16)</h2>
+            <p class="section-subtitle">Transforma tu vídeo horizontal (16:9) en un clip vertical optimizado para redes sociales (Reels/Shorts).</p>
+
+            <input type="file" id="inputVideo" accept="video/*" class="input-file">
+            
+            <button id="processBtn" class="btn-primary" disabled style="margin-top: 20px;">
+                ▶️ Procesar Recorte Vertical
+            </button>
+        </section>
+
+        <div class="video-grid fade-in" id="previewGrid" style="display:none;">
+            <div class="video-box card glass">
+                <h3>🎬 Original (16:9)</h3>
+                <video id="videoOriginal" controls></video>
+            </div>
+
+            <div class="video-box card glass">
+                <h3>✂️ Resultado Recortado (9:16)</h3>
+                <canvas id="videoCanvas"></canvas> 
+                
+                <video id="videoRecortado" controls style="display:none; margin-top: 20px;"></video>
+                <button id="downloadBtn" class="btn-secondary" style="margin-top: 15px; display:none;">
+                    ⬇ Descargar Clip Vertical
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/recorte-vertical.js"></script>
+</body>
+</html>

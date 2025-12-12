@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clip Smithery — Filtros Cinematográficos</title>
+
+    <link rel="stylesheet" href="styles.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <span class="logo">Clip Smithery <span>[AI]</span> 🛠️</span>
+    </nav>
+
+    <div class="back-container">
+        <a href="index.html" class="btn-back">⬅ Volver al menú</a>
+    </div>
+
+    <main class="container">
+
+        <section class="card glass upload-box fade-in">
+            <h2 class="section-title">✨ Filtros Cinematográficos en Vivo</h2>
+            <p class="section-subtitle">Sube un vídeo, previsualiza el filtro aplicado en el Canvas y, finalmente, graba la salida.</p>
+
+            <input type="file" id="inputVideo" accept="video/*" class="input-file">
+
+            <div class="controls-grid" style="margin-top:20px; display:flex; gap: 15px; flex-wrap: wrap; justify-content: center; align-items: center;">
+                
+                <select id="filterSelect" class="input-select" style="min-width: 200px;">
+                    <option value="none">Original (Sin Filtro)</option>
+                    <option value="grayscale">Grises (Noir)</option>
+                    <option value="sepia">Sepia (Retro)</option>
+                    <option value="invert">Invertido (Psicodélico)</option>
+                    <option value="contrast_boost">Alto Contraste (Dramático)</option>
+                    <option value="night_blue">Noche Americana (Cine)</option>
+                    <option value="warm_vintage">Cálido Vintage (Hollywood)</option>
+                    <option value="cool_mood">Ambiente Frío (Thriller)</option>
+                    <option value="vignette_dark">Viñeta Oscura (Foco)</option>
+                    <option value="hdr_sim">HDR Simulado (Detalle)</option>
+                    <option value="lomo_effect">Efecto Lomo (Saturado)</option>
+                </select>
+                
+                <button id="previewBtn" class="btn-primary" disabled>
+                    🔄 Previsualizar Filtro
+                </button>
+            </div>
+        </section>
+
+        <div class="video-grid fade-in" id="previewGrid" style="display:none;">
+            <div class="video-box card glass">
+                <h3>🎬 Original</h3>
+                <video id="videoOriginal" controls></video>
+            </div>
+
+            <div class="video-box card glass">
+                <h3>✨ Previsualización Filtrada</h3>
+                <canvas id="videoCanvas"></canvas>
+                
+                <button id="startRecordingBtn" class="btn-secondary" style="margin-top: 15px;" disabled>
+                    ▶️ Procesar y Grabar Vídeo Filtrado
+                </button>
+            </div>
+        </div>
+        
+        <section class="card glass fade-in" id="resultSection" style="display:none; margin-top: 20px;">
+            <h3 class="section-title">Resultado Final Procesado</h3>
+            <video id="videoFiltered" controls style="max-width: 100%; height: auto;"></video>
+            <button id="downloadBtn" class="btn-primary" style="margin-top: 15px;">
+                ⬇ Descargar Resultado Final
+            </button>
+        </section>
+
+    </main>
+
+    <script src="js/filtros.js"></script>
+</body>
+</html>
