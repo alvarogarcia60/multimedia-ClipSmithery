@@ -74,8 +74,6 @@ Crea un archivo llamado **`.env.local`** dentro de la carpeta `recomendador/` y 
 GEMINI_API_KEY="TU_CLAVE_DE_GEMINI_AQUÍ"
 ```
 
-> ⚠️ **Importante:**
-> Este archivo no debe subirse al repositorio. Asegúrate de que esté incluido en el `.gitignore`.
 
 ---
 
