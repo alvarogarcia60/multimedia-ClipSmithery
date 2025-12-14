@@ -1,8 +1,6 @@
 console.log("Módulo: GENERADOR DE TÍTULOS IA cargado.");
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
+/* ELEMENTOS */
 const inputDesc = document.getElementById("inputDesc");
 const generateBtn = document.getElementById("generateBtn");
 const resultSection = document.getElementById("resultSection");
@@ -12,10 +10,8 @@ const resultTags = document.getElementById("resultTags");
 const copyBtn = document.getElementById("copyBtn");
 
 
-// =====================================================
-// FUNCIONES
-// =====================================================
 
+/* FUNCIONES */
 async function generateTitles() {
     const description = inputDesc.value.trim();
     
@@ -85,10 +81,6 @@ function copyResults() {
     });
 }
 
-
-// =====================================================
-// EVENTOS
-// =====================================================
-
+/* EVENTOS */
 generateBtn.addEventListener("click", generateTitles);
 copyBtn.addEventListener("click", copyResults);

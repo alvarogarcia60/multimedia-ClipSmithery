@@ -1,6 +1,6 @@
-// ===============================
-//   GENERADOR DE PREGUNTAS
-// ===============================
+console.log("Módulo: RECOMENDADOR DE PELÍCULAS IA cargado correctamente");
+/*  GENERADOR DE PREGUNTAS */
+
 
 const questions = [
     {
@@ -40,9 +40,7 @@ const questions = [
     }
 ];
 
-// ===============================
-//   MOSTRAR PREGUNTAS
-// ===============================
+/*  MOSTRAR PREGUNTAS */
 
 function renderQuiz() {
     const quiz = document.getElementById("quizContainer");
@@ -73,9 +71,7 @@ function renderQuiz() {
 renderQuiz();
 
 
-// ===============================
-//   BOTÓN RECOMENDAR
-// ===============================
+/*  BOTÓN RECOMENDAR */
 
 document.getElementById("btnRecommend").addEventListener("click", async () => {
     const answers = {};
@@ -115,9 +111,7 @@ document.getElementById("btnRecommend").addEventListener("click", async () => {
 });
 
 
-// ===============================
-//   MOSTRAR RESULTADOS
-// ===============================
+/*  MOSTRAR RESULTADOS */
 
 function showResults(data) {
     document.getElementById("resultBox").style.display = "block";

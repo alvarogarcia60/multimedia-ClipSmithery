@@ -1,8 +1,6 @@
 console.log("Módulo: FILTROS CINEMATOGRÁFICOS cargado.");
 
-/* =====================================================
-   ELEMENTOS Y ESTADO
-===================================================== */
+/* ELEMENTOS Y ESTADO */
 const inputVideo = document.getElementById("inputVideo");
 const videoOriginal = document.getElementById("videoOriginal");
 const videoCanvas = document.getElementById("videoCanvas");
@@ -22,20 +20,14 @@ let animationFrameId = null;
 let mediaRecorder = null;
 let chunks = [];
 
-/* =====================================================
-   LÓGICA DE FILTROS (Manipulación de Píxeles)
-===================================================== */
+/* LÓGICA DE FILTROS (Manipulación de Píxeles) */
 
-/**
- * Función auxiliar para limitar un valor entre 0 y 255.
- */
+/*Función auxiliar para limitar un valor entre 0 y 255.*/
 function clamp(value) {
     return Math.min(255, Math.max(0, value));
 }
 
-/**
- * Aplica el filtro seleccionado directamente a los datos de píxeles (ImageData).
- */
+/*Aplica el filtro seleccionado directamente a los datos de píxeles (ImageData).*/
 function applyFilter(imageData, filter) {
     const data = imageData.data;
     const width = videoCanvas.width;
@@ -126,9 +118,7 @@ function applyFilter(imageData, filter) {
     }
 }
 
-/**
- * Loop principal de dibujo para PREVISUALIZACIÓN (muestra el filtro en vivo).
- */
+/*Loop principal de dibujo para PREVISUALIZACIÓN (muestra el filtro en vivo).*/
 function drawLoop() {
     if (videoOriginal.paused || videoOriginal.ended) {
         cancelAnimationFrame(animationFrameId);
@@ -148,10 +138,8 @@ function drawLoop() {
 }
 
 
-// =====================================================
-// PROCESO DE GRABACIÓN Y DESCARGA (Segundo Botón)
-// =====================================================
 
+// PROCESO DE GRABACIÓN Y DESCARGA (Segundo Botón)
 function processAndRecord(canvas, videoElement, filterName) {
     return new Promise((resolve, reject) => {
         chunks = [];
@@ -217,9 +205,9 @@ function processAndRecord(canvas, videoElement, filterName) {
 }
 
 
-// =====================================================
-// EVENTOS PRINCIPALES
-// =====================================================
+
+/*  EVENTOS PRINCIPALES */
+
 
 // 1. Cargar Video y preparar Canvas
 inputVideo.addEventListener("change", () => {

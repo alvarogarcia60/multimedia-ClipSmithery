@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -6,49 +6,199 @@
 
     <link rel="stylesheet" href="styles.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* LOGO */
+        .logo-link {
+            text-decoration: none; 
+        }
+        .logo-link:hover .logo {
+            filter: brightness(1.2); 
+            cursor: pointer;
+        }
+
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #66fcf1;
+            text-decoration: none;
+            border-radius: 10px;
+            background: rgba(102, 252, 241, 0.08);
+            border: 1px solid rgba(102, 252, 241, 0.35);
+            backdrop-filter: blur(6px);
+            transition: all 0.25s ease;
+        }
+
+        .btn-back:hover {
+            background: linear-gradient(90deg, #45a29e, #66fcf1);
+            color: #0b0c10;
+            box-shadow: 0 6px 25px rgba(102, 252, 241, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* UPLOAD */
+        .upload-box {
+            padding: 30px;
+        }
+        .upload-controls {
+            display: flex; 
+            gap: 15px; 
+            align-items: center; 
+            margin-top: 25px;
+            flex-wrap: wrap; 
+        }
+        .btn-primary {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, #45a29e, #66fcf1);
+            color: #0b0c10;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+        }
+
+        #inputVideo {
+            display: none;
+        }
+        .input-file-label {
+            padding: 12px 25px;
+            color: #c5c6c7;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(102, 252, 241, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* COMPARATIVA 50 / 50 */
+        .video-grid {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .video-box {
+            width: 50%;
+            padding: 20px;
+        }
+
+        .video-box h3 {
+            color: #c5c6c7;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 5px;
+        }
+
+        .video-box video,
+        .video-box canvas {
+            width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            background: #0b0c10;
+            border-radius: 8px;
+        }
+
+        .video-box canvas {
+            border: 2px dashed #45a29e;
+        }
+
+        @media (max-width: 900px) {
+            .video-grid {
+                flex-direction: column;
+            }
+            .video-box {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <nav class="navbar">
+
+<div class="back-container-fixed">
+    <a href="menu.html" class="btn-back">← Volver al menú</a>
+</div>
+
+<nav class="navbar">
+    <a href="welcome.html" class="logo-link">
         <span class="logo">Clip Smithery <span>[AI]</span> 🛠️</span>
-    </nav>
+    </a>
+</nav>
 
-    <div class="back-container">
-        <a href="menu.html" class="btn-back">⬅ Volver al menú</a>
-    </div>
+<main class="container">
 
-    <main class="container">
+    <section class="card glass upload-box fade-in">
+        <h2 class="section-title">✂️ Recorte Vertical (9:16)</h2>
+        <p class="section-subtitle">
+            Convierte tu vídeo horizontal en un formato vertical optimizado para Reels y Shorts.
+        </p>
 
-        <section class="card glass upload-box fade-in">
-            <h2 class="section-title">✂️ Recorte Vertical (9:16)</h2>
-            <p class="section-subtitle">Transforma tu vídeo horizontal (16:9) en un clip vertical optimizado para redes sociales (Reels/Shorts).</p>
-
-            <input type="file" id="inputVideo" accept="video/*" class="input-file">
+        <input type="file" id="inputVideo" accept="video/*">
+        
+        <div class="upload-controls">
+            <label for="inputVideo" id="fileLabel" class="input-file-label">
+                Elegir archivo
+            </label>
             
-            <button id="processBtn" class="btn-primary" disabled style="margin-top: 20px;">
+            <button id="processBtn" class="btn-primary" disabled>
                 ▶️ Procesar Recorte Vertical
             </button>
-        </section>
-
-        <div class="video-grid fade-in" id="previewGrid" style="display:none;">
-            <div class="video-box card glass">
-                <h3>🎬 Original (16:9)</h3>
-                <video id="videoOriginal" controls></video>
-            </div>
-
-            <div class="video-box card glass">
-                <h3>✂️ Resultado Recortado (9:16)</h3>
-                <canvas id="videoCanvas"></canvas> 
-                
-                <video id="videoRecortado" controls style="display:none; margin-top: 20px;"></video>
-                <button id="downloadBtn" class="btn-secondary" style="margin-top: 15px; display:none;">
-                    ⬇ Descargar Clip Vertical
-                </button>
-            </div>
         </div>
-    </main>
+        
+        <p id="fileNameDisplay">Ningún archivo seleccionado.</p>
+    </section>
 
-    <script src="js/recorte-vertical.js"></script>
+    <div class="video-grid fade-in" id="previewGrid" style="display:none;">
+        <div class="video-box card glass">
+            <h3>🎬 Original (16:9)</h3>
+            <video id="videoOriginal" controls></video>
+        </div>
+
+        <div class="video-box card glass">
+            <h3>✂️ Resultado (9:16)</h3>
+            <canvas id="videoCanvas"></canvas>
+
+            <video id="videoRecortado" controls style="display:none; margin-top:20px;"></video>
+
+            <button id="downloadBtn" class="btn-primary" style="margin-top:15px; display:none;">
+                ⬇ Descargar Clip Vertical
+            </button>
+        </div>
+    </div>
+
+</main>
+
+<script src="js/recorte-vertical.js"></script>
+<script>
+    const inputVideo = document.getElementById('inputVideo');
+    const processBtn = document.getElementById('processBtn');
+    const fileLabel = document.getElementById('fileLabel');
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    const previewGrid = document.getElementById('previewGrid');
+
+    inputVideo.addEventListener('change', () => {
+        const file = inputVideo.files[0];
+        processBtn.disabled = !file;
+        fileLabel.textContent = file ? 'Cambiar archivo' : 'Elegir archivo';
+        fileNameDisplay.textContent = file ? file.name : 'Ningún archivo seleccionado';
+        previewGrid.style.display = 'none';
+    });
+
+    processBtn.addEventListener('click', () => {
+        previewGrid.style.display = 'flex';
+    });
+</script>
+
 </body>
 </html>

@@ -2,52 +2,237 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mini-Netflix AI — Miniaturas</title>
+    <title>Clip Smithery — Miniaturas</title>
 
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* LOGO */
+        .logo-link {
+            text-decoration: none; 
+        }
+        .logo-link:hover .logo {
+            filter: brightness(1.2); 
+            cursor: pointer;
+        }
+
+        /* 1. BOTÓN VOLVER (Minimalista y profesional) */
+        .back-container {
+            margin: 20px auto 0 auto; 
+            max-width: 1200px; 
+            padding-left: 20px; 
+        }
+        .btn-back {
+            display: inline-block;
+            color: #66fcf1;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 1px solid rgba(102, 252, 241, 0.4); 
+            background: none; 
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+            font-family: inherit; 
+        }
+        .btn-back:hover {
+            background-color: rgba(102, 252, 241, 0.15); 
+            color: #ffffff; 
+        }
+
+        /* 2. ESTILOS DE LA CAJA DE SUBIDA Y CONTROLES (UNIFICADOS) */
+        .upload-box {
+            padding: 30px;
+        }
+        .upload-controls-grid {
+            display: flex; 
+            gap: 15px; 
+            align-items: center; 
+            margin-top: 25px;
+            flex-wrap: wrap; 
+        }
+        
+        /* Botón Primario (Generar Miniaturas) */
+        .btn-primary {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, #45a29e, #66fcf1);
+            color: #0b0c10;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+        }
+        
+        #inputThumbs { /* Ocultamos el input nativo */
+            display: none;
+        }
+        
+        /* Estilos del SELECTOR */
+        .select-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .select-label {
+            color: #c5c6c7;
+            font-size: 1rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .select-ui {
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(102, 252, 241, 0.3);
+            color: #66fcf1;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;    
+            appearance: none;         
+        }
+
+        /* Estilos del LABEL que simula el botón de archivo */
+        .input-file-label {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #c5c6c7;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(102, 252, 241, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap; 
+        }
+        .input-file-label:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* 3. ESTILOS DE RESULTADOS (THUMBNAIL GRID) */
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .thumbnail-item {
+            position: relative;
+            background: #0b0c10;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .thumbnail-item img, .thumbnail-item canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .thumbnail-item .download-link {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #45a29e;
+            color: #0b0c10;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border-top-left-radius: 8px;
+            transition: background 0.2s;
+        }
+        .thumbnail-item .download-link:hover {
+            background: #66fcf1;
+        }
+        
+    </style>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
     <nav class="navbar">
-        <span class="logo">Mini-Netflix <span>AI</span> 🎬</span>
+        <a href="welcome.html" class="logo-link">
+            <span class="logo">Clip Smithery <span>[AI]</span> 🛠️</span>
+        </a>
     </nav>
 
-    <!-- BOTÓN VOLVER -->
     <div class="back-container">
-        <a href="menu.html" class="btn-back">⬅ Volver al menú</a>
+        <a href="menu.html" class="btn-back">← Volver al menú de herramientas</a>
     </div>
 
     <main class="container">
 
-        <!-- SECCIÓN DE GENERACIÓN -->
         <section class="card glass fade-in upload-box">
             <h2 class="section-title">🖼️ Generar miniaturas del vídeo</h2>
-            <p class="section-subtitle">Crea imágenes del vídeo en los puntos que tú elijas</p>
+            <p class="section-subtitle">Crea imágenes del vídeo en los puntos clave que tú elijas.</p>
 
-            <label class="select-label">Número de miniaturas:</label>
-            <select id="thumbCount" class="select-ui">
-                <option value="3">3 miniaturas</option>
-                <option value="5">5 miniaturas</option>
-                <option value="10">10 miniaturas</option>
-            </select>
+            <input type="file" id="inputThumbs" accept="video/*">
 
-            <input type="file" id="inputThumbs" accept="video/*" class="input-file">
+            <div class="upload-controls-grid">
 
-            <button id="generateThumbsBtn" class="btn-primary">Generar miniaturas</button>
+                <div class="select-group">
+                    <label for="thumbCount" class="select-label">Número:</label>
+                    <select id="thumbCount" class="select-ui">
+                        <option value="3">3 miniaturas</option>
+                        <option value="5">5 miniaturas</option>
+                        <option value="10">10 miniaturas</option>
+                    </select>
+                </div>
+
+                <label for="inputThumbs" id="fileLabel" class="input-file-label">
+                    Elegir archivo
+                </label>
+
+                <button id="generateThumbsBtn" class="btn-primary" disabled>
+                    Generar miniaturas
+                </button>
+            </div>
+            
+            <p id="fileNameDisplay" style="color: #c5c6c7; font-size: 0.9rem; margin-top: 10px; text-align: left;">
+                Ningún archivo seleccionado.
+            </p>
         </section>
 
-        <!-- RESULTADOS -->
         <section class="card glass fade-in" id="thumbResults" style="display:none;">
             <h3 class="section-title">📸 Miniaturas generadas</h3>
-            <div id="thumbGrid" class="thumbnail-grid"></div>
+            <div id="thumbGrid" class="thumbnail-grid">
+                </div>
         </section>
 
     </main>
 
     <script src="js/miniaturas.js"></script>
+    <script>
+        // JS de la interfaz (cargador de archivos y visibilidad)
+        const inputThumbs = document.getElementById('inputThumbs');
+        const generateThumbsBtn = document.getElementById('generateThumbsBtn');
+        const fileLabel = document.getElementById('fileLabel');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        const thumbResults = document.getElementById('thumbResults');
+
+        inputThumbs.addEventListener('change', function() {
+            const fileSelected = this.files.length > 0;
+            const fileName = fileSelected ? this.files[0].name : 'Ningún archivo seleccionado.';
+            
+            generateThumbsBtn.disabled = !fileSelected;
+            
+            fileLabel.textContent = fileSelected ? 'Cambiar archivo' : 'Elegir archivo';
+            fileNameDisplay.textContent = fileSelected ? fileName : 'Ningún archivo seleccionado.';
+            
+            // Ocultar resultados al cargar nuevo archivo
+            thumbResults.style.display = 'none';
+        });
+
+        generateThumbsBtn.addEventListener('click', function() {
+            // La lógica real de generación está en js/miniaturas.js
+            thumbResults.style.display = 'block';
+        });
+    </script>
 </body>
 </html>

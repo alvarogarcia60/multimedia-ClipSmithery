@@ -1,8 +1,6 @@
 console.log("Módulo: COMPRESIÓN cargado correctamente");
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
+/*  ELEMENTOS */
 const inputVideo = document.getElementById("inputVideo");
 const processBtn = document.getElementById("processBtn");
 const downloadBtn = document.getElementById("downloadBtn");
@@ -13,28 +11,54 @@ const videoCompressed = document.getElementById("videoCompressed");
 const progressText = document.getElementById("progressText");
 const progressFill = document.getElementById("progressFill");
 
+// Elementos del nuevo diseño (Añadidos para referencia)
+const fileLabel = document.getElementById('fileLabel');
+const fileNameDisplay = document.getElementById('fileNameDisplay'); 
+const progressSection = document.getElementById('progressSection');
+const videoComparison = document.getElementById('videoComparison');
+const analysisSection = document.getElementById('analysis-section');
+
+
 let loadedFile = null;
 let compressedBlob = null;
 
 
-/* =====================================================
-   Cargar vídeo original
-===================================================== */
+/*  Cargar vídeo original (Ajustado para el nuevo diseño) */
 inputVideo.addEventListener("change", () => {
+    const fileSelected = inputVideo.files.length > 0;
     loadedFile = inputVideo.files[0];
     
-    if (loadedFile) {
+    // 1. Actualización de la interfaz
+    if (fileSelected) {
+        const fileName = loadedFile.name;
+
         videoOriginal.src = URL.createObjectURL(loadedFile);
-        progressText.textContent = "Progreso: 0%";
+        
+        fileNameDisplay.textContent = fileName;
+        fileLabel.textContent = 'Cambiar archivo';
+        processBtn.disabled = false;
+
+        // Resetear visualización
+        progressText.textContent = "Listo para procesar";
         progressFill.style.width = "0%";
+        
+        progressSection.style.display = "none";
+        videoComparison.style.display = "none";
+        analysisSection.style.display = "none";
+        downloadBtn.style.display = "none";
         downloadBtn.disabled = true;
+
+    } else {
+        // En caso de que se cancele la selección
+        fileNameDisplay.textContent = 'Ningún archivo seleccionado.';
+        fileLabel.textContent = 'Elegir archivo';
+        processBtn.disabled = true;
+        loadedFile = null;
     }
 });
 
 
-/* =====================================================
-   COMPRESIÓN PRO: Audio + Vídeo
-===================================================== */
+/*  COMPRESIÓN PRO: Audio + Vídeo */
 async function compressVideo(file) {
     return new Promise(async (resolve, reject) => {
 
@@ -42,17 +66,19 @@ async function compressVideo(file) {
         tempVideo.src = URL.createObjectURL(file);
         tempVideo.crossOrigin = "anonymous";
 
-        // Permite capturar audio
         tempVideo.muted = false;
         tempVideo.volume = 1.0;
 
-        // Silenciar realmente el output para que no suene
+        // Silenciar el output para que no suene
         const silenceCtx = new AudioContext();
         const silenceSource = silenceCtx.createMediaElementSource(tempVideo);
         const silenceGain = silenceCtx.createGain();
         silenceGain.gain.value = 0.0;
         silenceSource.connect(silenceGain);
         silenceGain.connect(silenceCtx.destination);
+
+        // Esperar a que el vídeo cargue metadata antes de reproducir
+        await new Promise(resolve => tempVideo.onloadedmetadata = resolve);
 
         await tempVideo.play();
         tempVideo.pause();
@@ -65,6 +91,7 @@ async function compressVideo(file) {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
 
+        // Compresión al 70%
         const targetWidth = tempVideo.videoWidth * 0.7;
         const targetHeight = tempVideo.videoHeight * 0.7;
 
@@ -94,7 +121,7 @@ async function compressVideo(file) {
 
         recorder.start();
 
-        // Dibujado de vídeo
+        // Dibujado de vídeo (bucle de grabación)
         function draw() {
             ctx.drawImage(tempVideo, 0, 0, targetWidth, targetHeight);
 
@@ -105,34 +132,63 @@ async function compressVideo(file) {
             requestAnimationFrame(draw);
         }
 
+        // Iniciar reproducción y dibujo
+        tempVideo.currentTime = 0;
         tempVideo.play();
         draw();
     });
 }
 
 
-/* =====================================================
-   Procesar vídeo
-===================================================== */
+/*  Procesar vídeo */
 processBtn.addEventListener("click", async () => {
     if (!loadedFile) {
         alert("Sube un vídeo primero");
         return;
     }
 
+    // 1. Mostrar secciones de progreso y análisis
+    progressSection.style.display = "block";
+    videoComparison.style.display = "flex";
+    
+    processBtn.disabled = true;
+    processBtn.textContent = "Procesando...";
+
     progressText.textContent = "Comprimiendo vídeo...";
     progressFill.style.width = "40%";
 
-    compressedBlob = await compressVideo(loadedFile);
+    try {
+        compressedBlob = await compressVideo(loadedFile);
+        videoCompressed.src = URL.createObjectURL(compressedBlob);
+        videoCompressed.onloadedmetadata = () => {
+            // Actualización final de la interfaz tras la compresión
+            progressFill.style.width = "100%";
+            progressText.textContent = "Completado ✔";
+            processBtn.textContent = "Proceso Finalizado";
+            processBtn.disabled = false; // Re-habilitar si se quiere procesar otro
+            
+            downloadBtn.style.display = "block";
+            downloadBtn.disabled = false;
+            
+            // Mostrar y rellenar el Panel de Análisis
+            analysisSection.style.display = "block";
+            fillAnalysisPanel();
+        };
 
-    videoCompressed.src = URL.createObjectURL(compressedBlob);
+    } catch(error) {
+        console.error("Error de compresión:", error);
+        progressText.textContent = "Error en el proceso ❌";
+        processBtn.textContent = "Reintentar";
+        processBtn.disabled = false;
+        alert("Fallo la compresión. Intenta con otro formato.");
+    }
+});
 
-    progressFill.style.width = "100%";
-    progressText.textContent = "Completado ✔";
-    downloadBtn.disabled = false;
 
-    /* ===== PANEL DE ANÁLISIS ===== */
-    const analysisBox = document.getElementById("analysis-section");
+/*  Rellenar Panel de Análisis */
+function fillAnalysisPanel() {
+    // Asegurarse de que los videos tienen metadata cargada antes de leer dimensiones
+    if (!loadedFile || !compressedBlob || !videoOriginal.videoWidth) return;
 
     document.getElementById("sizeOriginal").textContent =
         (loadedFile.size / 1024 / 1024).toFixed(2) + " MB";
@@ -142,7 +198,8 @@ processBtn.addEventListener("click", async () => {
 
     document.getElementById("resOriginal").textContent =
         `${videoOriginal.videoWidth} x ${videoOriginal.videoHeight}`;
-
+    
+    // Nota: videoCompressed.videoWidth solo funcionará si la metadata se ha cargado.
     document.getElementById("resCompressed").textContent =
         `${videoCompressed.videoWidth} x ${videoCompressed.videoHeight}`;
 
@@ -154,19 +211,15 @@ processBtn.addEventListener("click", async () => {
 
     document.getElementById("reductionPercent").textContent =
         reduction.toFixed(1) + "%";
-
-    analysisBox.style.display = "block";
-});
+}
 
 
-/* =====================================================
-   Descargar vídeo
-===================================================== */
+/*  Descargar vídeo */
 downloadBtn.addEventListener("click", () => {
     if (!compressedBlob) return;
 
     const a = document.createElement("a");
     a.href = URL.createObjectURL(compressedBlob);
-    a.download = "video_comprimido.webm";
+    a.download = "video_comprimido_ClipSmithery.webm";
     a.click();
 });

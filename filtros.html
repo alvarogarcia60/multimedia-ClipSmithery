@@ -6,16 +6,186 @@
 
     <link rel="stylesheet" href="styles.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* LOGO */
+        .logo-link {
+            text-decoration: none; 
+        }
+        .logo-link:hover .logo {
+            filter: brightness(1.2); 
+            cursor: pointer;
+        }
+
+        /* 1. BOTÓN VOLVER (Minimalista y profesional) */
+        .back-container {
+            margin: 20px auto 0 auto; 
+            max-width: 1200px; 
+            padding-left: 20px; 
+        }
+        .btn-back {
+            display: inline-block;
+            color: #66fcf1;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 1px solid rgba(102, 252, 241, 0.4); 
+            background: none; 
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+            font-family: inherit; 
+        }
+        .btn-back:hover {
+            background-color: rgba(102, 252, 241, 0.15); 
+            color: #ffffff; 
+        }
+
+        /* 2. BOTONES DE ACCIÓN (Procesar / Descargar) */
+        .btn-primary {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, #45a29e, #66fcf1);
+            color: #0b0c10;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+        }
+        
+        /* Botón de Grabación/Descarga - Usamos el estilo principal para resaltar la acción */
+        #startRecordingBtn, #downloadBtn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #45a29e, #66fcf1);
+            color: #0b0c10;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(102, 252, 241, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block;
+            width: 100%;
+        }
+        #downloadBtn:hover, #startRecordingBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(102, 252, 241, 0.6);
+        }
+
+        /* 3. ESTILOS DE LA CAJA DE SUBIDA Y CONTROLES (UNIFICADOS) */
+        .upload-box {
+            padding: 30px;
+        }
+        .upload-controls-grid {
+            display: flex; 
+            gap: 15px; 
+            align-items: center; 
+            margin-top: 25px;
+            flex-wrap: wrap; 
+        }
+        
+        #inputVideo { 
+            display: none;
+        }
+        
+        /* Estilos del SELECTOR */
+        .input-select {
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(102, 252, 241, 0.3);
+            color: #66fcf1;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            min-width: 200px;
+        }
+
+        /* Estilos del LABEL que simula el botón de archivo */
+        .input-file-label {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #c5c6c7;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(102, 252, 241, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            white-space: nowrap; 
+        }
+        .input-file-label:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 4. ESTILOS DE VÍDEO (COMPARATIVA 50/50) */
+        .video-grid {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .video-box {
+            flex: 1 1 calc(50% - 10px);
+            padding: 20px;
+        }
+
+        .video-box h3 {
+            color: #c5c6c7;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-box video,
+        .video-box canvas {
+            width: 100%;
+            height: auto;
+            max-height: 60vh;
+            display: block;
+            background: #0b0c10;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        /* Resultado de Grabación (Debajo de la comparación) */
+        #resultSection {
+            padding: 30px;
+            margin-top: 20px;
+        }
+        #videoFiltered {
+             width: 100%;
+             border-radius: 8px;
+             margin-bottom: 15px;
+        }
+        
+        /* Responsive: en móvil se apilan */
+        @media (max-width: 900px) {
+            .video-grid {
+                flex-direction: column;
+            }
+            .video-box {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <nav class="navbar">
-        <span class="logo">Clip Smithery <span>[AI]</span> 🛠️</span>
+        <a href="welcome.html" class="logo-link">
+            <span class="logo">Clip Smithery <span>[AI]</span> 🛠️</span>
+        </a>
     </nav>
 
     <div class="back-container">
-        <a href="menu.html" class="btn-back">⬅ Volver al menú</a>
+        <a href="menu.html" class="btn-back">← Volver al menú de herramientas</a>
     </div>
 
     <main class="container">
@@ -24,11 +194,11 @@
             <h2 class="section-title">✨ Filtros Cinematográficos en Vivo</h2>
             <p class="section-subtitle">Sube un vídeo, previsualiza el filtro aplicado en el Canvas y, finalmente, graba la salida.</p>
 
-            <input type="file" id="inputVideo" accept="video/*" class="input-file">
+            <input type="file" id="inputVideo" accept="video/*">
 
-            <div class="controls-grid" style="margin-top:20px; display:flex; gap: 15px; flex-wrap: wrap; justify-content: center; align-items: center;">
+            <div class="upload-controls-grid">
                 
-                <select id="filterSelect" class="input-select" style="min-width: 200px;">
+                <select id="filterSelect" class="input-select">
                     <option value="none">Original (Sin Filtro)</option>
                     <option value="grayscale">Grises (Noir)</option>
                     <option value="sepia">Sepia (Retro)</option>
@@ -41,11 +211,19 @@
                     <option value="hdr_sim">HDR Simulado (Detalle)</option>
                     <option value="lomo_effect">Efecto Lomo (Saturado)</option>
                 </select>
+
+                <label for="inputVideo" id="fileLabel" class="input-file-label">
+                    Elegir archivo
+                </label>
                 
                 <button id="previewBtn" class="btn-primary" disabled>
                     🔄 Previsualizar Filtro
                 </button>
             </div>
+            
+            <p id="fileNameDisplay" style="color: #c5c6c7; font-size: 0.9rem; margin-top: 10px; text-align: left;">
+                Ningún archivo seleccionado.
+            </p>
         </section>
 
         <div class="video-grid fade-in" id="previewGrid" style="display:none;">
@@ -58,16 +236,17 @@
                 <h3>✨ Previsualización Filtrada</h3>
                 <canvas id="videoCanvas"></canvas>
                 
-                <button id="startRecordingBtn" class="btn-secondary" style="margin-top: 15px;" disabled>
+                <button id="startRecordingBtn" style="margin-top: 15px;" disabled>
                     ▶️ Procesar y Grabar Vídeo Filtrado
                 </button>
             </div>
         </div>
         
-        <section class="card glass fade-in" id="resultSection" style="display:none; margin-top: 20px;">
+        <section class="card glass fade-in" id="resultSection" style="display:none;">
             <h3 class="section-title">Resultado Final Procesado</h3>
-            <video id="videoFiltered" controls style="max-width: 100%; height: auto;"></video>
-            <button id="downloadBtn" class="btn-primary" style="margin-top: 15px;">
+            <video id="videoFiltered" controls></video>
+            
+            <button id="downloadBtn" style="margin-top: 15px;">
                 ⬇ Descargar Resultado Final
             </button>
         </section>
@@ -75,5 +254,34 @@
     </main>
 
     <script src="js/filtros.js"></script>
+    <script>
+        // Obtener referencias de los elementos DOM
+        const inputVideo = document.getElementById('inputVideo');
+        const previewBtn = document.getElementById('previewBtn');
+        const fileLabel = document.getElementById('fileLabel');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        const previewGrid = document.getElementById('previewGrid');
+        
+        // 1. MANEJAR LA SELECCIÓN DEL ARCHIVO
+        inputVideo.addEventListener('change', function() {
+            const fileSelected = this.files.length > 0;
+            const fileName = fileSelected ? this.files[0].name : 'Ningún archivo seleccionado.';
+            
+            previewBtn.disabled = !fileSelected;
+            
+            fileLabel.textContent = fileSelected ? 'Cambiar archivo' : 'Elegir archivo';
+            fileNameDisplay.textContent = fileSelected ? fileName : 'Ningún archivo seleccionado.';
+            
+            // Ocultar resultados previos al cargar nuevo archivo
+            previewGrid.style.display = 'none';
+            document.getElementById('resultSection').style.display = 'none';
+        });
+        
+        // 2. Mostrar Previsualización al hacer click en el botón Preview
+        previewBtn.addEventListener('click', function() {
+            previewGrid.style.display = 'flex';
+            // Nota: La lógica de dibujado en Canvas y grabación se maneja en js/filtros.js
+        });
+    </script>
 </body>
 </html>

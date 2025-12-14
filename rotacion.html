@@ -4,65 +4,251 @@
     <meta charset="UTF-8">
     <title>Clip Smithery — Rotación y Espejo</title>
 
-    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* LOGO */
+        .logo-link {
+            text-decoration: none;
+        }
+        .logo-link:hover .logo {
+            filter: brightness(1.2);
+            cursor: pointer;
+        }
+
+        /* BOTÓN VOLVER */
+        .back-container {
+            margin: 20px auto 0 auto;
+            max-width: 1200px;
+            padding-left: 20px;
+        }
+        .btn-back {
+            display: inline-block;
+            color: #66fcf1;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 1px solid rgba(102, 252, 241, 0.4);
+            background: none;
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+            font-family: inherit;
+        }
+        .btn-back:hover {
+            background-color: rgba(102, 252, 241, 0.15);
+            color: #ffffff;
+        }
+
+        /* CAJA DE SUBIDA */
+        .upload-box {
+            padding: 30px;
+        }
+
+        .upload-controls-grid {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        /* Botón Primario (Procesar / Descargar) */
+        .btn-primary {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, #45a29e, #66fcf1);
+            color: #0b0c10;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+        }
+        
+        /* Botón de Descarga (Estilizado como primary, pero ID individual) */
+        #downloadBtn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #45a29e, #66fcf1);
+            color: #0b0c10;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(102, 252, 241, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
+            width: 100%;
+            display: block !important;
+        }
+        #downloadBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(102, 252, 241, 0.6);
+        }
+
+
+        #inputVideo {
+            display: none;
+        }
+
+        .input-select {
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(102, 252, 241, 0.3);
+            color: #66fcf1;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            min-width: 200px;
+        }
+
+        .input-file-label {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #c5c6c7;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(102, 252, 241, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+        .input-file-label:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* COMPARATIVA 50/50 REAL */
+        .video-grid {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .video-box {
+            flex: 1 1 calc(50% - 10px);
+            padding: 20px;
+        }
+
+        .video-box h3 {
+            color: #c5c6c7;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .video-box video,
+        .video-box canvas {
+            width: 100%;
+            max-height: 60vh;
+            display: block;
+            background: #0b0c10;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+        
+        @media (max-width: 900px) {
+            .video-grid {
+                flex-direction: column;
+            }
+            .video-box {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <nav class="navbar">
-        <a href="welcome.html" class="logo-link">
-            <span class="logo">Clip Smithery <span>[AI]</span> 🛠️</span>
-        </a>
-    </nav>
+<nav class="navbar">
+    <a href="welcome.html" class="logo-link">
+        <span class="logo">Clip Smithery <span>[AI]</span> 🛠️</span>
+    </a>
+</nav>
 
-    <div class="back-container">
-        <a href="menu.html" class="btn-back">← Volver al menú</a>
+<div class="back-container">
+    <a href="menu.html" class="btn-back">← Volver al menú</a>
+</div>
+
+<main class="container">
+
+    <section class="card glass upload-box fade-in">
+        <h2 class="section-title">🔄 Rotación y Espejo (Geometría)</h2>
+        <p class="section-subtitle">
+            Corrige la orientación del vídeo o aplica efectos de reflejo y graba la salida.
+        </p>
+
+        <input type="file" id="inputVideo" accept="video/*">
+
+        <div class="upload-controls-grid">
+
+            <select id="transformSelect" class="input-select">
+                <option value="none">Original (sin cambios)</option>
+                <option value="rotate90">Rotar 90° Derecha</option>
+                <option value="rotate180">Rotar 180°</option>
+                <option value="rotate270">Rotar 90° Izquierda</option>
+                <option value="flipH">Espejo Horizontal</option>
+                <option value="flipV">Espejo Vertical</option>
+            </select>
+
+            <label for="inputVideo" id="fileLabel" class="input-file-label">
+                Elegir archivo
+            </label>
+
+            <button id="processBtn" class="btn-primary" disabled>
+                ▶️ Procesar y Grabar Transformación
+            </button>
+        </div>
+
+        <p id="fileNameDisplay" style="color:#c5c6c7; font-size:0.9rem; margin-top:10px;">
+            Ningún archivo seleccionado.
+        </p>
+    </section>
+
+    <div class="video-grid fade-in" id="previewGrid" style="display:none;">
+        <div class="video-box card glass">
+            <h3>🎬 Original</h3>
+            <video id="videoOriginal" controls></video>
+        </div>
+
+        <div class="video-box card glass">
+            <h3>🔄 Transformado</h3>
+            <video id="videoTransformado" controls></video>
+
+            <button id="downloadBtn" class="btn-primary" style="margin-top:15px; display:none;">
+                ⬇ Descargar vídeo transformado
+            </button>
+        </div>
     </div>
 
-    <main class="container">
+</main>
 
-        <section class="card glass upload-box fade-in">
-            <h2 class="section-title">🔄 Rotación y Espejo (Geometría)</h2>
-            <p class="section-subtitle">Corrige la orientación del vídeo o aplica efectos de reflejo y graba la salida.</p>
+<script src="js/rotacion.js"></script>
+<script>
+    const inputVideo = document.getElementById('inputVideo');
+    const processBtn = document.getElementById('processBtn');
+    const fileLabel = document.getElementById('fileLabel');
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    const previewGrid = document.getElementById('previewGrid');
 
-            <input type="file" id="inputVideo" accept="video/*" class="input-file">
+    inputVideo.addEventListener('change', function () {
+        const fileSelected = this.files.length > 0;
+        processBtn.disabled = !fileSelected;
+        fileLabel.textContent = fileSelected ? 'Cambiar archivo' : 'Elegir archivo';
+        fileNameDisplay.textContent = fileSelected ? this.files[0].name : 'Ningún archivo seleccionado.';
+        previewGrid.style.display = 'none';
+    });
 
-            <div class="controls-grid" style="margin-top:20px; display:flex; gap: 15px; flex-wrap: wrap; justify-content: center; align-items: center;">
-                
-                <select id="transformSelect" class="input-select" style="min-width: 200px;">
-                    <option value="none">Original</option>
-                    <option value="rotate90">Rotar 90° Derecha</option>
-                    <option value="rotate180">Rotar 180°</option>
-                    <option value="rotate270">Rotar 90° Izquierda</option>
-                    <option value="flipH">Espejo Horizontal (Flip)</option>
-                    <option value="flipV">Espejo Vertical</option>
-                </select>
-                
-                <button id="processBtn" class="btn-primary" disabled>
-                    ▶️ Procesar y Grabar Transformación
-                </button>
-            </div>
-        </section>
+    processBtn.addEventListener('click', function () {
+        previewGrid.style.display = 'flex';
+    });
+</script>
 
-        <div class="video-grid fade-in" id="previewGrid" style="display:none;">
-            <div class="video-box card glass">
-                <h3>🎬 Original</h3>
-                <video id="videoOriginal" controls></video>
-            </div>
-
-            <div class="video-box card glass">
-                <h3>🔄 Previsualización Transformada</h3>
-                <canvas id="videoCanvas"></canvas>
-                
-                <video id="videoTransformado" controls style="display:none; margin-top: 20px;"></video>
-                <button id="downloadBtn" class="btn-secondary" style="margin-top: 15px; display:none;">
-                    ⬇ Descargar Vídeo Transformado
-                </button>
-            </div>
-        </div>
-    </main>
-
-    <script src="js/rotacion.js"></script>
 </body>
 </html>

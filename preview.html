@@ -2,46 +2,184 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mini-Netflix AI — Vista previa automática</title>
+    <title>Clip Smithery — Vista previa automática</title>
 
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Tipografía pro -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* LOGO */
+        .logo-link {
+            text-decoration: none; 
+        }
+        .logo-link:hover .logo {
+            filter: brightness(1.2); 
+            cursor: pointer;
+        }
+
+        /* 1. BOTÓN VOLVER (Minimalista y profesional) */
+        .back-container {
+            margin: 20px auto 0 auto; 
+            max-width: 1200px; 
+            padding-left: 20px; 
+        }
+        .btn-back {
+            display: inline-block;
+            color: #66fcf1;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 1px solid rgba(102, 252, 241, 0.4); 
+            background: none; 
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+            font-family: inherit; 
+        }
+        .btn-back:hover {
+            background-color: rgba(102, 252, 241, 0.15); 
+            color: #ffffff; 
+        }
+
+        /* 2. BOTÓN DE ACCIÓN (Generar / Descargar) */
+        .btn-primary {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, #45a29e, #66fcf1);
+            color: #0b0c10;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+        }
+        
+        /* Estilo para el botón de DESCARGA (Acción principal) */
+        #downloadPreviewBtn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #45a29e, #66fcf1);
+            color: #0b0c10;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(102, 252, 241, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+        #downloadPreviewBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(102, 252, 241, 0.6);
+        }
+
+        /* 3. ESTILOS DE LA CAJA DE SUBIDA Y CONTROLES (UNIFICADOS) */
+        .card {
+             padding: 30px;
+        }
+        .upload-controls-grid {
+            display: flex; 
+            gap: 15px; 
+            align-items: center; 
+            margin-top: 25px;
+            flex-wrap: wrap; 
+        }
+        
+        #inputPreview { 
+            display: none;
+        }
+        
+        /* Estilos del LABEL que simula el botón de archivo */
+        .input-file-label {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #c5c6c7;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(102, 252, 241, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            white-space: nowrap; 
+        }
+        .input-file-label:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* 4. ESTILOS DE RESULTADO Y PROGRESO */
+        #previewProgressSection {
+            padding: 30px;
+        }
+        .progress-bar {
+            background: rgba(102, 252, 241, 0.1);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        #previewProgressFill {
+            height: 100%;
+            width: 0%;
+            background: #66fcf1;
+            transition: width 0.3s;
+        }
+        
+        #previewResult {
+            padding: 30px;
+        }
+        #previewVideo {
+            width: 100%; 
+            height: auto;
+            border-radius: 10px; 
+            margin-top: 15px; 
+            /* Sombra suave para destacar el video */
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.15);
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
     <nav class="navbar">
-        <span class="logo">Mini-Netflix <span>AI</span> 🎬</span>
+        <a href="welcome.html" class="logo-link">
+            <span class="logo">Clip Smithery <span>[AI]</span> 🛠️</span>
+        </a>
     </nav>
 
-    <!-- BOTÓN VOLVER -->
     <div class="back-container fade-in">
-        <a href="menu.html" class="btn-back">⬅ Volver al menú</a>
+        <a href="menu.html" class="btn-back">← Volver al menú de herramientas</a>
     </div>
 
     <main class="container fade-in">
 
-        <!-- CARD PRINCIPAL -->
         <section class="card glass">
             <h2 class="section-title">🎞️ Vista previa automática</h2>
             <p class="section-subtitle">
-                Genera un clip corto (3–4 segundos) tipo Netflix que se reproduce automáticamente.
+                Genera un clip corto (3–4 segundos) optimizado para reproducción automática.
             </p>
 
-            <!-- INPUT -->
-            <input type="file" id="inputPreview" accept="video/*" class="input-file">
+            <input type="file" id="inputPreview" accept="video/*">
+            
+            <div class="upload-controls-grid">
 
-            <!-- BOTÓN -->
-            <button id="generatePreviewBtn" class="btn-primary">
-                Generar vista previa
-            </button>
+                <label for="inputPreview" id="fileLabel" class="input-file-label">
+                    Elegir archivo
+                </label>
+                
+                <button id="generatePreviewBtn" class="btn-primary" disabled>
+                    Generar vista previa
+                </button>
+            </div>
+            
+            <p id="fileNameDisplay" style="color: #c5c6c7; font-size: 0.9rem; margin-top: 10px; text-align: left;">
+                Ningún archivo seleccionado.
+            </p>
         </section>
 
-        <!-- PROGRESO -->
         <section class="card glass fade-in" id="previewProgressSection" style="display:none;">
             <p id="previewProgressText" class="progress-label">Procesando…</p>
 
@@ -50,13 +188,12 @@
             </div>
         </section>
 
-        <!-- RESULTADO -->
         <section class="card glass fade-in" id="previewResult" style="display:none;">
             <h3 class="section-title">Vista previa generada</h3>
 
-            <video id="previewVideo" controls muted style="margin-top: 15px; border-radius: 15px; width:100%; box-shadow:0 0 20px rgba(102,252,241,0.18);"></video>
+            <video id="previewVideo" controls muted autoplay></video>
 
-            <button id="downloadPreviewBtn" class="btn-secondary" disabled>
+            <button id="downloadPreviewBtn">
                 ⬇ Descargar vista previa
             </button>
         </section>
@@ -64,5 +201,35 @@
     </main>
 
     <script src="js/preview.js"></script>
+    <script>
+        // JS de la interfaz (cargador de archivos y visibilidad)
+        const inputPreview = document.getElementById('inputPreview');
+        const generatePreviewBtn = document.getElementById('generatePreviewBtn');
+        const fileLabel = document.getElementById('fileLabel');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        const previewProgressSection = document.getElementById('previewProgressSection');
+        const previewResult = document.getElementById('previewResult');
+
+        // Sincronización de carga de archivo
+        inputPreview.addEventListener('change', function() {
+            const fileSelected = this.files.length > 0;
+            const fileName = fileSelected ? this.files[0].name : 'Ningún archivo seleccionado.';
+            
+            generatePreviewBtn.disabled = !fileSelected;
+            
+            fileLabel.textContent = fileSelected ? 'Cambiar archivo' : 'Elegir archivo';
+            fileNameDisplay.textContent = fileSelected ? fileName : 'Ningún archivo seleccionado.';
+            
+            // Ocultar progreso y resultados al cargar nuevo archivo
+            previewProgressSection.style.display = 'none';
+            previewResult.style.display = 'none';
+        });
+
+        // Mostrar progreso al iniciar (La lógica real de proceso está en js/preview.js)
+        generatePreviewBtn.addEventListener('click', function() {
+            previewProgressSection.style.display = 'block';
+            previewResult.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
