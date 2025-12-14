@@ -68,7 +68,7 @@ npm install
 
 #### 2.2. Configuración de la API y Variables de Entorno
 
-Crea un archivo llamado **`.env.local`** dentro de la carpeta `recomendador/` y añade tu clave de la API de Google Gemini:
+Crea un archivo llamado **`.env.local`** dentro de la carpeta `recomendador/` y añade tu clave de la API de Google Gemini (puedes encontrarla aqui: https://aistudio.google.com/api-keys):
 
 ```env
 GEMINI_API_KEY="TU_CLAVE_DE_GEMINI_AQUÍ"
