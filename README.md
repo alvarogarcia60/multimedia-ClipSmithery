@@ -64,7 +64,6 @@ Abre tu terminal y navega al subdirectorio `recomendador/`:
 cd recomendador
 npm install
 
-Perfecto 👍 continúo **exactamente desde donde te has quedado**, manteniendo **formato `.md` limpio y coherente**. Copia esto **a partir de `npm install`** hacia abajo en tu `README.md`:
 
 ```markdown
 ```
