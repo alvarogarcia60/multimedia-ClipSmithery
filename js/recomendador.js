@@ -122,7 +122,10 @@ document.getElementById("btnRecommend").addEventListener("click", async () => {
 function showResults(data) {
     document.getElementById("resultBox").style.display = "block";
 
-    document.getElementById("resultMovie").innerHTML = data.recommendation || "";
-    document.getElementById("resultProfile").innerHTML = data.profile || "";
-    document.getElementById("resultAlternatives").innerHTML = data.alternatives || "";
+    document.getElementById("resultMovie").innerHTML =
+        data.result || "No se pudo generar la recomendación.";
+
+    document.getElementById("resultProfile").innerHTML = "";
+    document.getElementById("resultAlternatives").innerHTML = "";
 }
+

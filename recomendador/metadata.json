@@ -1,0 +1,7 @@
+{
+  "name": "CineMágico AI",
+  "description": "Tu asistente personal de cine. Responde unas preguntas y descubre películas perfectas para ti, chatea sobre ellas y crea pósters únicos.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
