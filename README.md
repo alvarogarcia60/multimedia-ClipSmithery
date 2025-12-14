@@ -64,8 +64,6 @@ Abre tu terminal y navega al subdirectorio `recomendador/`:
 cd recomendador
 npm install
 
-
-```markdown
 ```
 
 #### 2.2. Configuración de la API y Variables de Entorno
