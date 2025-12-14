@@ -135,6 +135,7 @@ Desde el menú principal podrás acceder a todos los módulos del laboratorio mu
 
 Al acceder al módulo **Test de Películas (IA)**, la aplicación **CineMágico AI** se cargará correctamente desde la versión compilada ubicada en `recomendador/dist/`.
 
+**En caso de necesitarlo puedes encontrar videos de ejemplo (videos_prueba) para poder probar las funcionalidades de la app**
 ---
 
 ## Notas Técnicas
